@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.library.recipe.modifiers.adding;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.math.IntMath;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.network.FriendlyByteBuf;
@@ -71,8 +70,7 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
 
   @Override
   public ValidatedResult getValidatedResult(ITinkerStationContainer inv) {
-    ItemStack tinkerable = inv.getTinkerableStack();
-    ToolStack tool = ToolStack.from(tinkerable);
+    ToolStack tool = inv.getTinkerable();
 
     // if the tool lacks the modifier, treat current as maxLevel, means we will add a new level
     ModifierId modifier = result.getId();
@@ -122,7 +120,7 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
     }
 
     // successfully added the modifier
-    return ValidatedResult.success(tool.createStack(Math.min(tinkerable.getCount(), shrinkToolSlotBy())));
+    return ValidatedResult.success(tool.createStack(Math.min(inv.getTinkerableSize(), shrinkToolSlotBy())));
   }
 
   /**
@@ -138,7 +136,8 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
       return;
     }
 
-    ToolStack inputTool = ToolStack.from(inv.getTinkerableStack());
+    // fetch the differences
+    ToolStack inputTool = inv.getTinkerable();
     ToolStack resultTool = ToolStack.from(result);
 
     // start by checking amount
