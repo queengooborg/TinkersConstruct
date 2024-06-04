@@ -43,5 +43,6 @@
   "result": {
     "name": "tconstruct:rebalanced",
     "value": "defense"
-  }
+  },
+  "variant_formatter": "tconstruct:default"
 }

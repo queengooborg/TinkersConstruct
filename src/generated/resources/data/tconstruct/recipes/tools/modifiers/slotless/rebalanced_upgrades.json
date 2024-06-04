@@ -38,5 +38,6 @@
   "result": {
     "name": "tconstruct:rebalanced",
     "value": "upgrades"
-  }
+  },
+  "variant_formatter": "tconstruct:default"
 }

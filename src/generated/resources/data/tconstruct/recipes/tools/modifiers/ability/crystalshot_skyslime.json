@@ -27,5 +27,6 @@
   "result": {
     "name": "tconstruct:crystalshot",
     "value": "skyslime"
-  }
+  },
+  "variant_formatter": "tconstruct:default"
 }

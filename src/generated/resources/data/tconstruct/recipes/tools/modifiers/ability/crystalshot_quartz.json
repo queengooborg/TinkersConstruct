@@ -27,5 +27,6 @@
   "result": {
     "name": "tconstruct:crystalshot",
     "value": "quartz"
-  }
+  },
+  "variant_formatter": "tconstruct:default"
 }

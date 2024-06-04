@@ -28,7 +28,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.ForgeI18n;
 import slimeknights.mantle.client.model.NBTKeyModel;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.GuiUtil;
@@ -71,12 +70,12 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
   private final IDrawable background;
   @Getter
   private final IDrawable icon;
-  private final String maxPrefix;
+  private final Component maxPrefix;
   private final IDrawable requirements, incremental;
   private final IDrawable[] slotIcons;
   private final Map<SlotType,TextureAtlasSprite> slotTypeSprites = new HashMap<>();
   public ModifierRecipeCategory(IGuiHelper helper) {
-    this.maxPrefix = ForgeI18n.getPattern(KEY_MAX);
+    this.maxPrefix = new TranslatableComponent(KEY_MAX);
     this.background = helper.createDrawable(BACKGROUND_LOC, 0, 0, 128, 77);
     this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, CreativeSlotItem.withSlot(new ItemStack(TinkerModifiers.creativeSlotItem), SlotType.UPGRADE));
     this.slotIcons = new IDrawable[6];
@@ -161,9 +160,17 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
 
     // draw max count
     Font fontRenderer = Minecraft.getInstance().font;
+    Component levelText = null;
+    Component variant = recipe.getVariant();
     int max = recipe.getMaxLevel();
-    if (max > 0) {
-      fontRenderer.draw(matrices, maxPrefix + max, 66, 16, Color.GRAY.getRGB());
+    if (variant != null) {
+      levelText = variant;
+    } else if (max > 0) {
+      levelText = maxPrefix.plainCopy().append(Integer.toString(max));
+    }
+    if (levelText != null) {
+      // center string
+      fontRenderer.draw(matrices, levelText, 86 - fontRenderer.width(levelText) / 2f, 16, Color.GRAY.getRGB());
     }
 
     // draw slot cost
@@ -173,8 +180,7 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     } else {
       drawSlotType(matrices, slots.getType(), 110, 58);
       String text = Integer.toString(slots.getCount());
-      int x = 111 - fontRenderer.width(text);
-      fontRenderer.draw(matrices, text, x, 63, Color.GRAY.getRGB());
+      fontRenderer.draw(matrices, text, 111 - fontRenderer.width(text), 63, Color.GRAY.getRGB());
     }
   }
 

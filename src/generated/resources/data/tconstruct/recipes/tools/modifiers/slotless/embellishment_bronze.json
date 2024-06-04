@@ -27,5 +27,6 @@
   "result": {
     "name": "tconstruct:embellishment",
     "value": "tconstruct:bronze"
-  }
+  },
+  "variant_formatter": "tconstruct:material"
 }

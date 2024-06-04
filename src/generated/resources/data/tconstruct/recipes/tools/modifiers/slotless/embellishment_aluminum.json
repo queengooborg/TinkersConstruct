@@ -27,5 +27,6 @@
   "result": {
     "name": "tconstruct:embellishment",
     "value": "tconstruct:aluminum"
-  }
+  },
+  "variant_formatter": "tconstruct:material"
 }

@@ -18,5 +18,6 @@
   "result": {
     "name": "tconstruct:embellishment",
     "value": "tconstruct:skyslime"
-  }
+  },
+  "variant_formatter": "tconstruct:material"
 }

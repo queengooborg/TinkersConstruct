@@ -18,5 +18,6 @@
   "result": {
     "name": "tconstruct:embellishment",
     "value": "tconstruct:copper"
-  }
+  },
+  "variant_formatter": "tconstruct:material"
 }

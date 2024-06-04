@@ -18,5 +18,6 @@
   "result": {
     "name": "tconstruct:embellishment",
     "value": "tconstruct:enderslime"
-  }
+  },
+  "variant_formatter": "tconstruct:material"
 }

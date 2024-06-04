@@ -27,5 +27,6 @@
   "result": {
     "name": "tconstruct:crystalshot",
     "value": "amethyst"
-  }
+  },
+  "variant_formatter": "tconstruct:default"
 }

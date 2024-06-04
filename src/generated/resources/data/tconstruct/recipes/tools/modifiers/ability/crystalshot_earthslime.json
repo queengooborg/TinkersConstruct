@@ -27,5 +27,6 @@
   "result": {
     "name": "tconstruct:crystalshot",
     "value": "earthslime"
-  }
+  },
+  "variant_formatter": "tconstruct:default"
 }
