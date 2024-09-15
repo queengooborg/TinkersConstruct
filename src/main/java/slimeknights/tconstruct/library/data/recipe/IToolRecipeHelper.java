@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.library.data.recipe;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -31,6 +32,19 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
   default void toolBuilding(Consumer<FinishedRecipe> consumer, IModifiable tool, String folder) {
     ToolBuildingRecipeBuilder.toolBuildingRecipe(tool)
                              .save(consumer, modResource(folder + Objects.requireNonNull(tool.asItem().getRegistryName()).getPath()));
+  }
+
+  /**
+   * Registers recipe for tool building
+   * @param consumer   Recipe consumer
+   * @param tool       Tool
+   * @param folder     Folder for recipe
+   * @param layoutSlot StationLayoutSlot id
+   */
+  default void toolBuilding(Consumer<FinishedRecipe> consumer, IModifiable tool, String folder, ResourceLocation layoutSlot) {
+    ToolBuildingRecipeBuilder.toolBuildingRecipe(tool)
+      .layoutSlot(layoutSlot)
+      .save(consumer, prefix(tool.asItem(), folder));
   }
 
   /**

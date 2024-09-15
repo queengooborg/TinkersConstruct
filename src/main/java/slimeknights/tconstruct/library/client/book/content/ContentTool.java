@@ -35,7 +35,6 @@ import slimeknights.tconstruct.library.recipe.tinkerstation.building.ToolBuildin
 import slimeknights.tconstruct.library.tools.definition.PartRequirement;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
-import slimeknights.tconstruct.library.tools.helper.TooltipUtil;
 import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import slimeknights.tconstruct.library.tools.part.IToolPart;
 
@@ -175,10 +174,7 @@ public class ContentTool extends PageContent {
         for (int i = 0; i < required.size(); i++) {
           IToolPart part = required.get(i).getPart();
           if (part != null) {
-            // mark the part as display to suppress the invalid material tooltip
-            ItemStack stack = part.withMaterialForDisplay(ToolBuildHandler.getRenderMaterial(i));
-            stack.getOrCreateTag().putBoolean(TooltipUtil.KEY_DISPLAY, true);
-            partBuilder.add(ItemStackList.of(stack));
+            partBuilder.add(ItemStackList.of(ToolBuildHandler.getDisplayPart(part, i)));
           }
         }
         // fetch the tool building recipe for extra ingredients

@@ -28,6 +28,8 @@ public class ToolBuildingRecipeBuilder extends AbstractRecipeBuilder<ToolBuildin
   private final IModifiable output;
   @Setter
   private int outputSize = 1;
+  @Nullable @Setter
+  private ResourceLocation layoutSlot = null;
   private final List<Ingredient> extraRequirements = new ArrayList<>();
 
   /** Adds an extra ingredient requirement */
@@ -65,6 +67,9 @@ public class ToolBuildingRecipeBuilder extends AbstractRecipeBuilder<ToolBuildin
           array.add(ingredient.toJson());
         }
         json.add("extra_requirements", array);
+      }
+      if (layoutSlot != null) {
+        json.addProperty("slot_layout", layoutSlot.toString());
       }
     }
 
