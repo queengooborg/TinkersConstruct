@@ -2730,7 +2730,7 @@
   "recipe.tconstruct.modifier.not_enough_slots": "Need at least %s %s slots to add this modifier",
   "recipe.tconstruct.modifier.validate_slots": "This change leaves the tool with too few %s slots",
   "recipe.tconstruct.modifier.min_level": "This recipe requires the tool to have at least %s level %s to apply",
-  "recipe.tconstruct.modifier.max_level": "%s level cannot be above %s",
+  "recipe.tconstruct.modifier.max_level": "This recipe cannot increase %s above level %s (ignoring traits)",
   "recipe.tconstruct.modifier.requirements_error": "Tool state invalid for one of the modifiers. Contact your modpack maker and request a more descriptive error.",
 
   "recipe.tconstruct.tool_recycling": "Tool Recycling",

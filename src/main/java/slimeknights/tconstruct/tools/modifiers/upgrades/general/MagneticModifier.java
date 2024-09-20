@@ -56,7 +56,7 @@ public class MagneticModifier extends TotalArmorLevelModifier implements PlantHa
   public void onUnequip(IToolStackView tool, int level, EquipmentChangeContext context) {
     // don't set the flag when its a held tool, since they have their own method of magnetic
     if (context.getChangedSlot().getType() == Type.ARMOR) {
-      super.onEquip(tool, level, context);
+      super.onUnequip(tool, level, context);
     }
   }
 
