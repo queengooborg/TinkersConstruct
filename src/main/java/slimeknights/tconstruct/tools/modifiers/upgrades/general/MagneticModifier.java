@@ -3,6 +3,7 @@ package slimeknights.tconstruct.tools.modifiers.upgrades.general;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot.Type;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +21,7 @@ import slimeknights.tconstruct.library.modifiers.hook.ShearsModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.TotalArmorLevelModifier;
 import slimeknights.tconstruct.library.modifiers.util.ModifierHookMap.Builder;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability.TinkerDataKey;
+import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.context.ToolHarvestContext;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -35,6 +37,22 @@ public class MagneticModifier extends TotalArmorLevelModifier implements PlantHa
   public MagneticModifier() {
     super(MAGNET);
     MinecraftForge.EVENT_BUS.addListener(MagneticModifier::onLivingTick);
+  }
+
+  @Override
+  public void onEquip(IToolStackView tool, int level, EquipmentChangeContext context) {
+    // don't set the flag when its a held tool, since they have their own method of magnetic
+    if (context.getChangedSlot().getType() == Type.ARMOR) {
+      super.onEquip(tool, level, context);
+    }
+  }
+
+  @Override
+  public void onUnequip(IToolStackView tool, int level, EquipmentChangeContext context) {
+    // don't set the flag when its a held tool, since they have their own method of magnetic
+    if (context.getChangedSlot().getType() == Type.ARMOR) {
+      super.onEquip(tool, level, context);
+    }
   }
 
   @Override
