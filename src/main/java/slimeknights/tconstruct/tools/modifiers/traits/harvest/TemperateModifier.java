@@ -12,7 +12,9 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.TinkerHooks;
 import slimeknights.tconstruct.library.modifiers.hook.ConditionalStatModifierHook;
+import slimeknights.tconstruct.library.modifiers.util.ModifierHookMap.Builder;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.FloatToolStat;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
@@ -37,6 +39,12 @@ public class TemperateModifier extends Modifier implements ConditionalStatModifi
     // temperature ranges from -1.25 to 1.25, so make it go -1 to 1
     // negative is cold, positive is hot
     return (living.level.getBiome(pos).value().getTemperature(pos) - BASELINE_TEMPERATURE) * level / 1.25f;
+  }
+
+  @Override
+  protected void registerHooks(Builder hookBuilder) {
+    super.registerHooks(hookBuilder);
+    hookBuilder.addHook(this, TinkerHooks.CONDITIONAL_STAT);
   }
 
   @Override
