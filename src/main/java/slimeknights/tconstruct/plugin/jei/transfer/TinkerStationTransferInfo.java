@@ -4,49 +4,42 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.Slot;
-import slimeknights.tconstruct.library.recipe.modifiers.adding.IDisplayModifierRecipe;
-import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 import slimeknights.tconstruct.tables.menu.TinkerStationContainerMenu;
 import slimeknights.tconstruct.tools.item.ArmorSlotType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TinkerStationTransferInfo implements IRecipeTransferInfo<TinkerStationContainerMenu,IDisplayModifierRecipe> {
+public record TinkerStationTransferInfo<T>(RecipeType<T> getRecipeType) implements IRecipeTransferInfo<TinkerStationContainerMenu,T> {
   @Override
   public Class<TinkerStationContainerMenu> getContainerClass() {
     return TinkerStationContainerMenu.class;
   }
 
-  @SuppressWarnings("removal")
+  @SuppressWarnings({"removal", "unchecked"})
   @Override
-  public Class<IDisplayModifierRecipe> getRecipeClass() {
-    return IDisplayModifierRecipe.class;
+  public Class<T> getRecipeClass() {
+    return (Class<T>)getRecipeType().getRecipeClass();
   }
 
   @SuppressWarnings("removal")
   @Override
   public ResourceLocation getRecipeCategoryUid() {
-    return TConstructJEIConstants.MODIFIERS.getUid();
+    return getRecipeType().getUid();
   }
 
   @Override
-  public RecipeType<IDisplayModifierRecipe> getRecipeType() {
-    return TConstructJEIConstants.MODIFIERS;
-  }
-
-  @Override
-  public boolean canHandle(TinkerStationContainerMenu container, IDisplayModifierRecipe recipe) {
+  public boolean canHandle(TinkerStationContainerMenu container, T recipe) {
     return true;
   }
 
   @Override
-  public List<Slot> getRecipeSlots(TinkerStationContainerMenu container, IDisplayModifierRecipe recipe) {
+  public List<Slot> getRecipeSlots(TinkerStationContainerMenu container, T recipe) {
     return container.getInputSlots();
   }
 
   @Override
-  public List<Slot> getInventorySlots(TinkerStationContainerMenu container, IDisplayModifierRecipe recipe) {
+  public List<Slot> getInventorySlots(TinkerStationContainerMenu container, T recipe) {
     List<Slot> slots = new ArrayList<>();
     // skip over inputs, output slot, tool slot, armor, and offhand
     int start = container.getInputSlots().size() + 3 + ArmorSlotType.values().length;
