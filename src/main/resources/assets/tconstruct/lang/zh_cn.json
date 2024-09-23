@@ -1893,6 +1893,13 @@
   "modifier.tconstruct.crystalshot": "晶镞",
   "modifier.tconstruct.crystalshot.flavor": "手持箭也没那么厉害",
   "modifier.tconstruct.crystalshot.description": "弓不再发射箭矢，而是发射自身长出的水晶碎片；水晶的生长会额外消耗耐久度",
+  "modifier.tconstruct.crystalshot.amethyst": "紫水晶",
+  "modifier.tconstruct.crystalshot.earthslime": "大地黏液",
+  "modifier.tconstruct.crystalshot.skyslime": "碧空黏液",
+  "modifier.tconstruct.crystalshot.ichor": "灵浆",
+  "modifier.tconstruct.crystalshot.enderslime": "末影黏液",
+  "modifier.tconstruct.crystalshot.quartz": "石英",
+  "modifier.tconstruct.crystalshot.random": "随机",
   "modifier.tconstruct.multishot": "多重射击",
   "modifier.tconstruct.multishot.flavor": "善射似精灵！",
   "modifier.tconstruct.multishot.description": "允许弩一次射出多支箭",
@@ -2235,6 +2242,10 @@
   "modifier.tconstruct.rebalanced": "均衡",
   "modifier.tconstruct.rebalanced.flavor": "平衡之鳞",
   "modifier.tconstruct.rebalanced.description": "使工具获得2个额外的强化槽，种类任选；但若选择最强大的种类，则会受到相应的惩罚。",
+  "modifier.tconstruct.rebalanced.upgrades": "升级",
+  "modifier.tconstruct.rebalanced.abilities": "能力",
+  "modifier.tconstruct.rebalanced.souls": "灵魂",
+  "modifier.tconstruct.rebalanced.defense": "防御",
 
   "__comment": "Three more +1 upgrade modifiers for modpacks",
   "modifier.tconstruct.red_extra_upgrade": "红色额外升级",
@@ -2683,7 +2694,7 @@
   "recipe.tconstruct.damaging.broken": "工具已损坏",
   "recipe.tconstruct.overslime.at_capacity": "工具已无更多空间来容纳黏液覆层",
   
-  "recipe.tconstruct.swappable.already_present": "工具已经拥有了此变种的%s",
+  "recipe.tconstruct.swappable.already_present": "工具已经拥有了%2$s变种的%1$s",
 
   "gui.tconstruct.modifier_worktable": "强化调配台",
   "gui.tconstruct.modifier_worktable.title": "强化调配",
@@ -2881,6 +2892,9 @@
   "jei.tconstruct.modifiers.max": "最大次数：",
 
   "jei.tconstruct.severing.title": "肢解",
+
+  "jei.tconstruct.tinkering.tool_building": "工具制造",
+  "jei.tconstruct.tinkering.tool_building.anvil": "宽型工具需要工匠砧制造或替换部件",
 
   "jei.tconstruct.part_builder.title": "部件制造台",
   "jei.tconstruct.part_builder.cost": "花费：%s",
