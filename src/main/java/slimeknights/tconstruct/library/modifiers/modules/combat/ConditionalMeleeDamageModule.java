@@ -103,6 +103,7 @@ public record ConditionalMeleeDamageModule(
     public void serialize(ConditionalMeleeDamageModule object, JsonObject json) {
       object.condition.serializeInto(json);
       json.add("target", LivingEntityPredicate.LOADER.serialize(object.target));
+      json.add("attacker", LivingEntityPredicate.LOADER.serialize(object.attacker));
       json.addProperty("percent", object.percent);
       object.formula.serialize(json);
     }

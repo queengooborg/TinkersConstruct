@@ -21,6 +21,7 @@
           }
         ]
       },
+      "attacker": "mantle:any",
       "percent": false,
       "each_level": 2.0
     }

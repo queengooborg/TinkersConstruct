@@ -8,7 +8,7 @@
     },
     {
       "type": "tconstruct:mob_effect",
-      "entity": "mantle:any",
+      "target": "mantle:any",
       "effect": "minecraft:slowness",
       "level": {
         "per_level": 0.5

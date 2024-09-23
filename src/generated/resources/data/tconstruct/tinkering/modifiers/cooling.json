@@ -9,6 +9,7 @@
     {
       "type": "tconstruct:conditional_melee_damage",
       "target": "mantle:fire_immune",
+      "attacker": "mantle:any",
       "percent": false,
       "each_level": 1.6
     }

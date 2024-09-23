@@ -12,6 +12,7 @@
         "type": "mantle:mob_type",
         "mobs": "minecraft:water"
       },
+      "attacker": "mantle:any",
       "percent": false,
       "each_level": 2.0
     }

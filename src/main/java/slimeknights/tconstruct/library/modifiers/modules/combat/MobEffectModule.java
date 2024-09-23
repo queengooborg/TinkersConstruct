@@ -145,7 +145,7 @@ public record MobEffectModule(
     @Override
     public void serialize(MobEffectModule object, JsonObject json) {
       object.condition.serializeInto(json);
-      json.add("entity", LivingEntityPredicate.LOADER.serialize(object.target));
+      json.add("target", LivingEntityPredicate.LOADER.serialize(object.target));
       json.addProperty("effect", Objects.requireNonNull(object.effect.getRegistryName()).toString());
       json.add("level", object.level.serialize());
       json.add("time", object.time.serialize());

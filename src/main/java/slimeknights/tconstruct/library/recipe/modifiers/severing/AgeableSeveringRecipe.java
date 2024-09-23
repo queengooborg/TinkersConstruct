@@ -6,10 +6,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import slimeknights.mantle.recipe.helper.ItemOutput;
 import slimeknights.mantle.recipe.helper.LoggingRecipeSerializer;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.mantle.util.JsonHelper;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import javax.annotation.Nullable;
 
@@ -19,6 +21,11 @@ public class AgeableSeveringRecipe extends SeveringRecipe {
   public AgeableSeveringRecipe(ResourceLocation id, EntityIngredient ingredient, ItemOutput adultOutput, @Nullable ItemOutput childOutput) {
     super(id, ingredient, adultOutput);
     this.childOutput = childOutput;
+  }
+
+  @Override
+  public RecipeSerializer<?> getSerializer() {
+    return TinkerModifiers.ageableSeveringSerializer.get();
   }
 
   @Override

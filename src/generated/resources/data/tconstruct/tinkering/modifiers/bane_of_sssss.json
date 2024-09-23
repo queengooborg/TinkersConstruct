@@ -21,12 +21,13 @@
           }
         ]
       },
+      "attacker": "mantle:any",
       "percent": false,
       "each_level": 2.0
     },
     {
       "type": "tconstruct:mob_effect",
-      "entity": {
+      "target": {
         "type": "mantle:or",
         "predicates": [
           {

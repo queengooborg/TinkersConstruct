@@ -35,7 +35,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:glass"
+                  "material": "tconstruct:glass",
+                  "index": 0
                 }
               ]
             }
@@ -61,7 +62,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:bone"
+                  "material": "tconstruct:bone",
+                  "index": 0
                 }
               ]
             }
@@ -87,7 +89,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:necrotic_bone"
+                  "material": "tconstruct:necrotic_bone",
+                  "index": 0
                 }
               ]
             }
@@ -113,7 +116,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:rotten_flesh"
+                  "material": "tconstruct:rotten_flesh",
+                  "index": 0
                 }
               ]
             }
@@ -139,7 +143,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:ender_pearl"
+                  "material": "tconstruct:ender_pearl",
+                  "index": 0
                 }
               ]
             }
@@ -165,7 +170,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:bloodbone"
+                  "material": "tconstruct:bloodbone",
+                  "index": 0
                 }
               ]
             }
@@ -191,7 +197,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:string"
+                  "material": "tconstruct:string",
+                  "index": 0
                 }
               ]
             }
@@ -217,7 +224,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:darkthread"
+                  "material": "tconstruct:darkthread",
+                  "index": 0
                 }
               ]
             }
@@ -243,7 +251,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:iron"
+                  "material": "tconstruct:iron",
+                  "index": 0
                 }
               ]
             }
@@ -269,7 +278,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:copper"
+                  "material": "tconstruct:copper",
+                  "index": 0
                 }
               ]
             }
@@ -295,7 +305,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:blazing_bone"
+                  "material": "tconstruct:blazing_bone",
+                  "index": 0
                 }
               ]
             }
@@ -321,7 +332,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:gold"
+                  "material": "tconstruct:gold",
+                  "index": 0
                 }
               ]
             }
@@ -347,7 +359,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:rose_gold"
+                  "material": "tconstruct:rose_gold",
+                  "index": 0
                 }
               ]
             }
@@ -373,7 +386,8 @@
                 },
                 {
                   "type": "tconstruct:has_material",
-                  "material": "tconstruct:pig_iron"
+                  "material": "tconstruct:pig_iron",
+                  "index": 0
                 }
               ]
             }

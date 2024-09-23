@@ -50,6 +50,9 @@ public record HasMaterialPredicate(MaterialVariantId material, int index) implem
     @Override
     public void serialize(HasMaterialPredicate object, JsonObject json) {
       json.addProperty("material", object.material.toString());
+      if (object.index != -1) {
+        json.addProperty("index", object.index);
+      }
     }
 
     @Override

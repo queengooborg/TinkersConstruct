@@ -18,7 +18,7 @@
     },
     {
       "type": "tconstruct:mob_effect",
-      "entity": "mantle:any",
+      "target": "mantle:any",
       "effect": "tconstruct:pierce",
       "level": {
         "per_level": 1.0

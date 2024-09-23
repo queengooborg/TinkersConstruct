@@ -64,11 +64,12 @@ public record ModifierSlotModule(SlotType type, int count, ModifierModuleConditi
         throw new JsonSyntaxException("Invalid slot type name '" + slotName + "'");
       }
       int count = JsonUtils.getIntMin(json, "count", 1);
-      return new ModifierSlotModule(SlotType.getOrCreate(slotName), count);
+      return new ModifierSlotModule(SlotType.getOrCreate(slotName), count, ModifierModuleCondition.deserializeFrom(json));
     }
 
     @Override
     public void serialize(ModifierSlotModule object, JsonObject json) {
+      object.condition.serializeInto(json);
       json.addProperty("name", object.type.getName());
       json.addProperty("count", object.count);
     }
@@ -77,13 +78,14 @@ public record ModifierSlotModule(SlotType type, int count, ModifierModuleConditi
     public ModifierSlotModule fromNetwork(FriendlyByteBuf buffer) {
       SlotType type = SlotType.read(buffer);
       int slotCount = buffer.readVarInt();
-      return new ModifierSlotModule(type, slotCount);
+      return new ModifierSlotModule(type, slotCount, ModifierModuleCondition.fromNetwork(buffer));
     }
 
     @Override
     public void toNetwork(ModifierSlotModule object, FriendlyByteBuf buffer) {
       object.type.write(buffer);
       buffer.writeVarInt(object.count);
+      object.condition.toNetwork(buffer);
     }
   };
 }

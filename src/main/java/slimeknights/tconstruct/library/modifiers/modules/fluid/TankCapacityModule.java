@@ -47,7 +47,7 @@ public class TankCapacityModule implements ModifierModule, VolatileDataModifierH
   @Override
   public void addVolatileData(ToolRebuildContext context, ModifierEntry modifier, ModDataNBT volatileData) {
     ResourceLocation key = getCapacityKey();
-    volatileData.putInt(key, capacity * modifier.getLevel() + volatileData.getInt(key));
+    volatileData.putInt(key, capacity * (scaleCapacity ? modifier.getLevel() : 1) + volatileData.getInt(key));
   }
 
   @Override
