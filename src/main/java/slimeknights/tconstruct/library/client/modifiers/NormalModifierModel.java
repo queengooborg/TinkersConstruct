@@ -43,7 +43,11 @@ public class NormalModifierModel implements IBakedModifierModel {
   @Override
   public ImmutableList<BakedQuad> getQuads(IToolStackView tool, ModifierEntry entry, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, @Nullable ItemLayerPixels pixels) {
     int index = isLarge ? 1 : 0;
-    return MantleItemLayerModel.getQuadsForSprite(color, -1, spriteGetter.apply(textures[index]), transforms, luminosity, pixels);
+    Material material = textures[index];
+    if (material == null) {
+      return ImmutableList.of();
+    }
+    return MantleItemLayerModel.getQuadsForSprite(color, -1, spriteGetter.apply(material), transforms, luminosity, pixels);
   }
 
   private record Unbaked(int color, int luminosity) implements IUnbakedModifierModel {
