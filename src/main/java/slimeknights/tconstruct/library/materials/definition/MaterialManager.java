@@ -23,7 +23,6 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.exception.TinkerJSONException;
 import slimeknights.tconstruct.library.json.JsonRedirect;
 import slimeknights.tconstruct.library.materials.json.MaterialJson;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.utils.GenericTagUtil;
 import slimeknights.tconstruct.library.utils.Util;
 
@@ -149,7 +148,7 @@ public class MaterialManager extends SimpleJsonResourceReloadListener {
    * @param tag  Tag instance
    * @return  Contained values
    */
-  public List<IMaterial> getValues(TagKey<Modifier> tag) {
+  public List<IMaterial> getValues(TagKey<IMaterial> tag) {
     return tags.getOrDefault(tag.location(), Tag.empty()).getValues();
   }
 
