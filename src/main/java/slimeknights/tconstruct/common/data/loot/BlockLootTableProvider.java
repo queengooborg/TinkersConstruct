@@ -4,9 +4,10 @@ import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.core.Registry;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -29,7 +30,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.loot.CanToolPerformAction;
-import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.mantle.loot.function.RetexturedLootFunction;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
 import slimeknights.mantle.registration.object.FenceBuildingBlockObject;
@@ -53,20 +53,27 @@ import slimeknights.tconstruct.world.block.DirtType;
 import slimeknights.tconstruct.world.block.FoliageType;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class BlockLootTableProvider extends BlockLoot {
+public class BlockLootTableProvider extends BlockLootSubProvider {
+
+  protected BlockLootTableProvider() {
+    // TODO: Replace HashSet with some list of explosive resistant items
+    super(new HashSet<>(), FeatureFlags.REGISTRY.allFlags());
+  }
+
   @Nonnull
   @Override
   protected Iterable<Block> getKnownBlocks() {
-    return ForgeRegistries.BLOCKS.getValues().stream()
-                                 .filter((block) -> TConstruct.MOD_ID.equals(Registry.BLOCK.getKey(block).getNamespace()))
-                                 .collect(Collectors.toList());
+    return BuiltInRegistries.BLOCK.stream()
+      .filter((block) -> TConstruct.MOD_ID.equals(BuiltInRegistries.BLOCK.getKey(block).getNamespace()))
+      .collect(Collectors.toList());
   }
 
   @Override
-  protected void addTables() {
+  protected void generate() {
     this.addCommon();
     this.addDecorative();
     this.addGadgets();
@@ -123,7 +130,7 @@ public class BlockLootTableProvider extends BlockLoot {
     // tinker chest - name and color
     this.add(TinkerTables.tinkersChest.get(), block -> droppingWithFunctions(block, builder ->
       builder.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
-             .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy(TinkersChestBlockEntity.TAG_CHEST_COLOR, "display.color"))));
+        .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy(TinkersChestBlockEntity.TAG_CHEST_COLOR, "display.color"))));
     // part chest - just name
     this.add(TinkerTables.partChest.get(), block ->
       droppingWithFunctions(block, builder ->
@@ -131,7 +138,7 @@ public class BlockLootTableProvider extends BlockLoot {
     // cast chest - name and inventory
     this.add(TinkerTables.castChest.get(), block -> droppingWithFunctions(block, builder ->
       builder.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
-             .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Items", "TinkerData.Items"))));
+        .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Items", "TinkerData.Items"))));
 
     // tables with legs
     this.dropTable(TinkerTables.craftingStation.get());
@@ -171,8 +178,8 @@ public class BlockLootTableProvider extends BlockLoot {
     });
     this.add(TinkerWorld.slimeSapling.get(FoliageType.ENDER), sapling -> applyExplosionDecay(
       sapling, LootTable.lootTable().withPool(LootPool.lootPool()
-                                                           .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(sapling).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MangrovePropaguleBlock.AGE, 4)))
-                                                           .add(LootItem.lootTableItem(sapling)))));
+        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(sapling).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MangrovePropaguleBlock.AGE, 4)))
+        .add(LootItem.lootTableItem(sapling)))));
     TinkerWorld.pottedSlimeSapling.forEach(this::dropPottedContents);
     TinkerWorld.pottedSlimeFern.forEach(this::dropPottedContents);
 
@@ -247,7 +254,7 @@ public class BlockLootTableProvider extends BlockLoot {
 
     Function<Block, LootTable.Builder> dropTank = block -> droppingWithFunctions(block, builder ->
       builder.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
-             .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy(NBTTags.TANK, NBTTags.TANK)));
+        .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy(NBTTags.TANK, NBTTags.TANK)));
     TinkerSmeltery.searedTank.forEach(block -> this.add(block, dropTank));
     this.add(TinkerSmeltery.searedLantern.get(), dropTank);
 
@@ -284,7 +291,7 @@ public class BlockLootTableProvider extends BlockLoot {
 
     Function<Block, LootTable.Builder> dropTank = block -> droppingWithFunctions(block, builder ->
       builder.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
-             .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy(NBTTags.TANK, NBTTags.TANK)));
+        .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy(NBTTags.TANK, NBTTags.TANK)));
     TinkerSmeltery.scorchedTank.forEach(block -> this.add(block, dropTank));
     this.add(TinkerSmeltery.scorchedLantern.get(), dropTank);
 
@@ -314,40 +321,42 @@ public class BlockLootTableProvider extends BlockLoot {
     return createSelfDropDispatchTable(block, SILK_TOUCH_OR_SHEARS, alternativeLootEntry);
   }
 
-  private static LootTable.Builder dropSapling(Block blockIn, Block saplingIn, float... fortuneIn) {
+  private LootTable.Builder dropSapling(Block blockIn, Block saplingIn, float... fortuneIn) {
     return droppingSilkOrShears(blockIn, applyExplosionCondition(blockIn, LootItem.lootTableItem(saplingIn)).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortuneIn)));
   }
 
-  private static LootTable.Builder randomDropSlimeBallOrSapling(FoliageType foliageType, Block blockIn, Block sapling, float... fortuneIn) {
+  private LootTable.Builder randomDropSlimeBallOrSapling(FoliageType foliageType, Block blockIn, Block sapling, float... fortuneIn) {
     LootTable.Builder builder = dropSapling(blockIn, sapling, fortuneIn);
     SlimeType slime = foliageType.asSlime();
     if (slime != null) {
       return builder.withPool(
         LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                .when(HAS_NO_SHEARS_OR_SILK_TOUCH)
-                .add(applyExplosionCondition(blockIn, LootItem.lootTableItem(TinkerCommons.slimeball.get(slime)))
-                       .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 1 / 50f, 1 / 45f, 1 / 40f, 1 / 30f, 1 / 20f))));
+          .when(HAS_NO_SHEARS_OR_SILK_TOUCH)
+          .add(applyExplosionCondition(blockIn, LootItem.lootTableItem(TinkerCommons.slimeball.get(slime)))
+            .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 1 / 50f, 1 / 45f, 1 / 40f, 1 / 30f, 1 / 20f))));
     }
     return builder;
   }
 
-  private static LootTable.Builder droppingWithFunctions(Block block, Function<LootItem.Builder<?>,LootItem.Builder<?>> mapping) {
+  private LootTable.Builder droppingWithFunctions(Block block, Function<LootItem.Builder<?>, LootItem.Builder<?>> mapping) {
     return LootTable.lootTable().withPool(applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(mapping.apply(LootItem.lootTableItem(block)))));
   }
 
   /**
    * Registers all loot tables for a building block object
-   * @param object  Object instance
+   *
+   * @param object Object instance
    */
   private void registerBuildingLootTables(BuildingBlockObject object) {
     this.dropSelf(object.get());
-    this.add(object.getSlab(), BlockLoot::createSlabItemTable);
+    this.add(object.getSlab(), this::createSlabItemTable);
     this.dropSelf(object.getStairs());
   }
 
   /**
    * Registers all loot tables for a wall building block object
-   * @param object  Object instance
+   *
+   * @param object Object instance
    */
   private void registerWallBuildingLootTables(WallBuildingBlockObject object) {
     registerBuildingLootTables(object);
@@ -356,14 +365,17 @@ public class BlockLootTableProvider extends BlockLoot {
 
   /**
    * Registers all loot tables for a fence building block object
-   * @param object  Object instance
+   *
+   * @param object Object instance
    */
   private void registerFenceBuildingLootTables(FenceBuildingBlockObject object) {
     registerBuildingLootTables(object);
     this.dropSelf(object.getFence());
   }
 
-  /** Adds all loot tables relevant to the given wood object */
+  /**
+   * Adds all loot tables relevant to the given wood object
+   */
   private void registerWoodLootTables(WoodBlockObject object) {
     registerFenceBuildingLootTables(object);
     // basic
@@ -373,7 +385,7 @@ public class BlockLootTableProvider extends BlockLoot {
     this.dropSelf(object.getStrippedWood());
     // door
     this.dropSelf(object.getFenceGate());
-    this.add(object.getDoor(), BlockLoot::createDoorTable);
+    this.add(object.getDoor(), this::createDoorTable);
     this.dropSelf(object.getTrapdoor());
     // redstone
     this.dropSelf(object.getPressurePlate());
@@ -382,24 +394,28 @@ public class BlockLootTableProvider extends BlockLoot {
     this.dropSelf(object.getSign());
   }
 
-  private static Function<Block, LootTable.Builder> ADD_TABLE = block -> droppingWithFunctions(block, (builder) ->
+  private final Function<Block, LootTable.Builder> ADD_TABLE = block -> droppingWithFunctions(block, (builder) ->
     builder.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(RetexturedLootFunction::new));
 
-  /** Registers a block that drops with its own texture stored in NBT */
+  /**
+   * Registers a block that drops with its own texture stored in NBT
+   */
   private void dropTable(Block table) {
     this.add(table, ADD_TABLE);
   }
 
-  /** Adds all loot tables relevant to the given geode block set */
+  /**
+   * Adds all loot tables relevant to the given geode block set
+   */
   private void registerGeode(GeodeItemObject geode) {
     this.dropSelf(geode.getBlock());
     // cluster
     this.add(geode.getBud(BudSize.CLUSTER), block -> createSilkTouchDispatchTable(
       block, LootItem.lootTableItem(geode.get())
-                     .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F)))
-                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
-                     .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES)))
-                     .otherwise(applyExplosionDecay(block, LootItem.lootTableItem(geode.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
+        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F)))
+        .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
+        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES)))
+        .otherwise(applyExplosionDecay(block, LootItem.lootTableItem(geode.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
     // buds
     for (BudSize size : BudSize.SIZES) {
       this.dropWhenSilkTouch(geode.getBud(size));

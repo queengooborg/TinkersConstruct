@@ -143,9 +143,9 @@ public class TConstruct {
     DataGenerator datagenerator = event.getGenerator();
     ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
     boolean server = event.includeServer();
-    BlockTagProvider blockTags = new BlockTagProvider(datagenerator, existingFileHelper);
+    BlockTagProvider blockTags = new BlockTagProvider(datagenerator, event.getLookupProvider(), existingFileHelper);
     datagenerator.addProvider(server, blockTags);
-    datagenerator.addProvider(server, new ItemTagProvider(datagenerator, blockTags, existingFileHelper));
+    datagenerator.addProvider(server, new ItemTagProvider(datagenerator, event.getLookupProvider(), blockTags, existingFileHelper));
     datagenerator.addProvider(server, new FluidTagProvider(datagenerator, existingFileHelper));
     datagenerator.addProvider(server, new EntityTypeTagProvider(datagenerator, existingFileHelper));
     datagenerator.addProvider(server, new BlockEntityTypeTagProvider(datagenerator, existingFileHelper));
