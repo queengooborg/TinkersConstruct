@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.gadgets.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Sheets;
@@ -65,8 +65,8 @@ public class FancyItemFrameRenderer<T extends FancyItemFrameEntity> extends Item
     Direction facing = frame.getDirection();
     Vec3 offset = this.getRenderOffset(frame, partialTicks);
     matrices.translate(facing.getStepX() * 0.46875D - offset.x(), facing.getStepY() * 0.46875D - offset.y(), facing.getStepZ() * 0.46875D - offset.z());
-    matrices.mulPose(Vector3f.XP.rotationDegrees(frame.getXRot()));
-    matrices.mulPose(Vector3f.YP.rotationDegrees(180.0F - frame.getYRot()));
+    matrices.mulPose(Axis.XP.rotationDegrees(frame.getXRot()));
+    matrices.mulPose(Axis.YP.rotationDegrees(180.0F - frame.getYRot()));
 
     // render the frame
     ItemStack stack = frame.getItem();
@@ -97,10 +97,10 @@ public class FancyItemFrameRenderer<T extends FancyItemFrameEntity> extends Item
       // for diamond, render the timer as a partial rotation
       if (frameType == FrameType.DIAMOND) {
         int rotation = mapdata != null ? (frameRotation + 2) % 4 * 4 : frameRotation;
-        matrices.mulPose(Vector3f.ZP.rotationDegrees(rotation * 360f / 16f));
+        matrices.mulPose(Axis.ZP.rotationDegrees(rotation * 360f / 16f));
       } else {
         int rotation = mapdata != null ? (frameRotation + 2) % 4 * 2 : frameRotation;
-        matrices.mulPose(Vector3f.ZP.rotationDegrees(rotation * 360f / 8f));
+        matrices.mulPose(Axis.ZP.rotationDegrees(rotation * 360f / 8f));
       }
       if (!MinecraftForge.EVENT_BUS.post(new RenderItemInFrameEvent(frame, this, matrices, bufferIn, packedLight))) {
         if (mapdata != null) {

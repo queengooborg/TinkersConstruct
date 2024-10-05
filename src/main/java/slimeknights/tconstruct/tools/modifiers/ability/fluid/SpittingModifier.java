@@ -1,7 +1,5 @@
 package slimeknights.tconstruct.tools.modifiers.ability.fluid;
 
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -11,6 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.UseAnim;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -109,7 +109,7 @@ public class SpittingModifier extends Modifier implements GeneralInteractionModi
                 // setup projectile target
                 Vector3f targetVector = new Vector3f(entity.getViewVector(1.0f));
                 float angle = startAngle + (10 * shotIndex);
-                targetVector.transform(new Quaternion(new Vector3f(entity.getUpVector(1.0f)), angle, true));
+                targetVector.transform(new Quaternionf(new Vector3f(entity.getUpVector(1.0f)), angle, true));
                 spit.shoot(targetVector.x(), targetVector.y(), targetVector.z(), velocity, inaccuracy);
 
                 // store all modifiers on the spit

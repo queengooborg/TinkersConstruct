@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.gadgets.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -23,8 +23,8 @@ public class RenderShuriken extends EntityRenderer<ShurikenEntityBase> {
   public void render(ShurikenEntityBase entity, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
     if (entity.tickCount >= 2 || !(this.entityRenderDispatcher.camera.getEntity().distanceToSqr(entity) < 12.25D)) {
       matrixStackIn.pushPose();
-      matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(90));
-      matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(-(entity.tickCount + partialTicks) * 30 % 360));
+      matrixStackIn.mulPose(Axis.XP.rotationDegrees(90));
+      matrixStackIn.mulPose(Axis.ZP.rotationDegrees(-(entity.tickCount + partialTicks) * 30 % 360));
       matrixStackIn.translate(-0.03125, -0.09375, 0);
       this.itemRenderer.renderStatic(entity.getItem(), ItemTransforms.TransformType.GROUND, packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn, entity.getId());
       matrixStackIn.popPose();

@@ -25,9 +25,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.math.Quaternion;
 import com.mojang.math.Transformation;
-import com.mojang.math.Vector3f;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -62,6 +60,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import slimeknights.mantle.client.model.util.ColoredBlockModel;
 import slimeknights.mantle.util.JsonHelper;
 import slimeknights.tconstruct.TConstruct;
@@ -82,7 +82,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
   public static final IGeometryLoader<FluidContainerModel> LOADER = FluidContainerModel::deserialize;
 
   /** Clone of same named field from {@link net.minecraftforge.client.model.DynamicFluidContainerModel} */
-  public static final Transformation FLUID_TRANSFORM = new Transformation(Vector3f.ZERO, Quaternion.ONE, new Vector3f(1, 1, 1.002f), Quaternion.ONE);
+  public static final Transformation FLUID_TRANSFORM = new Transformation(new Vector3f(0.0F, 0.0F, 0.0F), new Quaternionf(0.0F, 0.0F, 0.0F, 1.0F), new Vector3f(1, 1, 1.002f), new Quaternionf(0.0F, 0.0F, 0.0F, 1.0F));
 
   /** Deserializes this model from JSON */
   public static FluidContainerModel deserialize(JsonObject json, JsonDeserializationContext context) {
@@ -149,7 +149,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
 
     // if its a gas and we flipping, flip it
     if (flipGas && !fluid.isEmpty() && fluid.getFluid().getFluidType().isLighterThanAir()) {
-      modelState = new SimpleModelState(modelState.getRotation().compose(new Transformation(null, new Quaternion(0, 0, 1, 0), null, null)));
+      modelState = new SimpleModelState(modelState.getRotation().compose(new Transformation(null, new Quaternionf(0, 0, 1, 0), null, null)));
     }
 
     // start building the mode
