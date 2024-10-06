@@ -13,6 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -60,6 +61,7 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.stats.ToolType;
+import slimeknights.tconstruct.util.CreativeModeTabs;
 import slimeknights.tconstruct.world.TinkerStructures;
 import slimeknights.tconstruct.world.TinkerWorld;
 
@@ -154,6 +156,11 @@ public class TConstruct {
     datagenerator.addProvider(server, new TConstructLootTableProvider(datagenerator));
     datagenerator.addProvider(server, new AdvancementsProvider(datagenerator));
     datagenerator.addProvider(server, new GlobalLootModifiersProvider(datagenerator));
+  }
+
+  @SubscribeEvent
+  public void buildContents(CreativeModeTabEvent.Register event) {
+    CreativeModeTabs.makeTabs(event);
   }
 
   /** Shared behavior between item and block missing mappings */

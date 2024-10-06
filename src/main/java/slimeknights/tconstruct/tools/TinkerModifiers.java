@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -23,6 +24,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
+import slimeknights.mantle.item.BlockTooltipItem;
 import slimeknights.mantle.recipe.helper.LoadableRecipeSerializer;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
@@ -269,7 +271,6 @@ import slimeknights.tconstruct.tools.stats.ToolType;
 import slimeknights.tconstruct.util.SimpleRecipeSerializer;
 
 import static slimeknights.tconstruct.TConstruct.getResource;
-import static slimeknights.tconstruct.tools.TinkerTools.TAB_TOOLS;
 
 /**
  * Contains modifiers and the items or blocks used to craft modifiers
@@ -290,26 +291,26 @@ public final class TinkerModifiers extends TinkerModule {
    * Blocks
    */
   // material
-  public static final ItemObject<Block> silkyJewelBlock = BLOCKS.register("silky_jewel_block", metalBuilder(MaterialColor.GOLD), HIDDEN_BLOCK_ITEM);
+  public static final ItemObject<Block> silkyJewelBlock = BLOCKS.register("silky_jewel_block", metalBuilder(MaterialColor.GOLD), (b) -> new BlockItem(b, new Item.Properties()));
 
   /*
    * Items
    */
-  public static final ItemObject<Item> silkyCloth = ITEMS.register("silky_cloth", GENERAL_PROPS);
-  public static final ItemObject<Item> silkyJewel = ITEMS.register("silky_jewel", HIDDEN_PROPS);
-  public static final ItemObject<Item> dragonScale = ITEMS.register("dragon_scale", () -> new DragonScaleItem(new Item.Properties().tab(TAB_GENERAL).rarity(Rarity.RARE)));
+  public static final ItemObject<Item> silkyCloth = ITEMS.register("silky_cloth", new Item.Properties());
+  public static final ItemObject<Item> silkyJewel = ITEMS.register("silky_jewel", new Item.Properties());
+  public static final ItemObject<Item> dragonScale = ITEMS.register("dragon_scale", () -> new DragonScaleItem(new Item.Properties().rarity(Rarity.RARE)));
   // durability reinforcements
-  public static final ItemObject<Item> emeraldReinforcement = ITEMS.register("emerald_reinforcement", GENERAL_PROPS);
-  public static final ItemObject<Item> slimesteelReinforcement = ITEMS.register("slimesteel_reinforcement", GENERAL_PROPS);
+  public static final ItemObject<Item> emeraldReinforcement = ITEMS.register("emerald_reinforcement", new Item.Properties());
+  public static final ItemObject<Item> slimesteelReinforcement = ITEMS.register("slimesteel_reinforcement", new Item.Properties());
   // armor reinforcements
-  public static final ItemObject<Item> ironReinforcement = ITEMS.register("iron_reinforcement", GENERAL_PROPS);
-  public static final ItemObject<Item> searedReinforcement = ITEMS.register("seared_reinforcement", GENERAL_PROPS);
-  public static final ItemObject<Item> goldReinforcement = ITEMS.register("gold_reinforcement", GENERAL_PROPS);
-  public static final ItemObject<Item> cobaltReinforcement = ITEMS.register("cobalt_reinforcement", GENERAL_PROPS);
-  public static final ItemObject<Item> obsidianReinforcement = ITEMS.register("obsidian_reinforcement", GENERAL_PROPS);
+  public static final ItemObject<Item> ironReinforcement = ITEMS.register("iron_reinforcement", new Item.Properties());
+  public static final ItemObject<Item> searedReinforcement = ITEMS.register("seared_reinforcement", new Item.Properties());
+  public static final ItemObject<Item> goldReinforcement = ITEMS.register("gold_reinforcement", new Item.Properties());
+  public static final ItemObject<Item> cobaltReinforcement = ITEMS.register("cobalt_reinforcement", new Item.Properties());
+  public static final ItemObject<Item> obsidianReinforcement = ITEMS.register("obsidian_reinforcement", new Item.Properties());
   // special
-  public static final ItemObject<Item> modifierCrystal = ITEMS.register("modifier_crystal", () -> new ModifierCrystalItem(new Item.Properties().tab(TAB_TOOLS).stacksTo(16)));
-  public static final ItemObject<Item> creativeSlotItem = ITEMS.register("creative_slot", () -> new CreativeSlotItem(new Item.Properties().tab(TAB_TOOLS)));
+  public static final ItemObject<Item> modifierCrystal = ITEMS.register("modifier_crystal", () -> new ModifierCrystalItem(new Item.Properties().stacksTo(16)));
+  public static final ItemObject<Item> creativeSlotItem = ITEMS.register("creative_slot", () -> new CreativeSlotItem(new Item.Properties()));
 
   // entity
   public static final RegistryObject<EntityType<FluidEffectProjectile>> fluidSpitEntity = ENTITIES.register("fluid_spit", () ->

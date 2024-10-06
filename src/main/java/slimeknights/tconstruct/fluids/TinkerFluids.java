@@ -74,7 +74,7 @@ public final class TinkerFluids extends TinkerModule {
 
   // basic
   public static final FlowingFluidObject<ForgeFlowingFluid> venom = FLUIDS.register("venom").type(slime("venom").temperature(310)).bucket().block(createEffect(0, () -> new MobEffectInstance(MobEffects.POISON, 5*20))).flowing();
-  public static final ItemObject<Item> venomBottle = ITEMS.register("venom_bottle", () -> new FluidContainerFoodItem(new Item.Properties().food(TinkerFood.VENOM_BOTTLE).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(venom.get(), FluidValues.BOTTLE)));
+  public static final ItemObject<Item> venomBottle = ITEMS.register("venom_bottle", () -> new FluidContainerFoodItem(new Item.Properties().food(TinkerFood.VENOM_BOTTLE).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(venom.get(), FluidValues.BOTTLE)));
   public static final FluidObject<UnplaceableFluid> powderedSnow = FLUIDS.register("powdered_snow").bucket(() -> Items.POWDER_SNOW_BUCKET).type(powder("powdered_snow").temperature(270)).unplacable();
 
   // slime -  note second name parameter is forge tag name
@@ -86,11 +86,11 @@ public final class TinkerFluids extends TinkerModule {
   // bottles of slime
   public static final EnumObject<SlimeType, Item> slimeBottle = new EnumObject.Builder<SlimeType, Item>(SlimeType.class)
     .putAll(ITEMS.registerEnum(SlimeType.LIQUID, "slime_bottle", type -> new FluidContainerFoodItem(
-      new Item.Properties().food(TinkerFood.getBottle(type)).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(slime.get(type), FluidValues.BOTTLE))))
-    .put(SlimeType.ICHOR, ITEMS.register("ichor_slime_bottle", () -> new ContainerFoodItem(new Item.Properties().food(TinkerFood.ICHOR_BOTTLE).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE))))
+      new Item.Properties().food(TinkerFood.getBottle(type)).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(slime.get(type), FluidValues.BOTTLE))))
+    .put(SlimeType.ICHOR, ITEMS.register("ichor_slime_bottle", () -> new ContainerFoodItem(new Item.Properties().food(TinkerFood.ICHOR_BOTTLE).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE))))
     .build();
   public static final ItemObject<Item> magmaBottle = ITEMS.register("magma_bottle", () -> new FluidContainerFoodItem(
-    new Item.Properties().food(TinkerFood.MAGMA_BOTTLE).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE),
+    new Item.Properties().food(TinkerFood.MAGMA_BOTTLE).stacksTo(1).craftRemainder(Items.GLASS_BOTTLE),
     () -> new FluidStack(magma.get(), FluidValues.BOTTLE)));
 
   // foods
@@ -99,12 +99,12 @@ public final class TinkerFluids extends TinkerModule {
   public static FlowingFluidObject<ForgeFlowingFluid> mushroomStew = FLUIDS.register("mushroom_stew").type(cool("mushroom_stew").temperature(400)).bucket().block(Material.WATER).flowing();
   public static FlowingFluidObject<ForgeFlowingFluid> rabbitStew   = FLUIDS.register("rabbit_stew").type(cool("rabbit_stew").temperature(400)).bucket().block(Material.WATER).flowing();
   public static FlowingFluidObject<ForgeFlowingFluid> meatSoup     = FLUIDS.register("meat_soup").type(cool("meat_soup").temperature(400)).bucket().block(Material.WATER).flowing();
-  public static final ItemObject<Item> meatSoupBowl = ITEMS.register("meat_soup", () -> new ContainerFoodItem(new Item.Properties().food(TinkerFood.MEAT_SOUP).tab(TAB_GENERAL).stacksTo(1).craftRemainder(Items.BOWL)));
+  public static final ItemObject<Item> meatSoupBowl = ITEMS.register("meat_soup", () -> new ContainerFoodItem(new Item.Properties().food(TinkerFood.MEAT_SOUP).stacksTo(1).craftRemainder(Items.BOWL)));
 
   // potion
   public static final FluidObject<UnplaceableFluid> potion = FLUIDS.register("potion").type(() -> new PotionFluidType(cool().descriptionId("item.minecraft.potion.effect.empty").density(1100).viscosity(1100).temperature(315))).bucket(fluid -> new PotionBucketItem(fluid, ItemProperties.BUCKET_PROPS)).unplacable();
-  public static final ItemObject<Item> splashBottle = ITEMS.register("splash_bottle", () -> new BottleItem(Items.SPLASH_POTION, GENERAL_PROPS));
-  public static final ItemObject<Item> lingeringBottle = ITEMS.register("lingering_bottle", () -> new BottleItem(Items.LINGERING_POTION, GENERAL_PROPS));
+  public static final ItemObject<Item> splashBottle = ITEMS.register("splash_bottle", () -> new BottleItem(Items.SPLASH_POTION, new Item.Properties()));
+  public static final ItemObject<Item> lingeringBottle = ITEMS.register("lingering_bottle", () -> new BottleItem(Items.LINGERING_POTION, new Item.Properties()));
 
   // base molten fluids
   public static final FlowingFluidObject<ForgeFlowingFluid> searedStone   = FLUIDS.register("seared_stone").type(hot("seared_stone").temperature(900).lightLevel(6)).block(createBurning(6, 8, 2f)).bucket().flowing();

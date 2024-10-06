@@ -6,10 +6,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -25,14 +21,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistries.Keys;
-import slimeknights.mantle.item.BlockTooltipItem;
-import slimeknights.mantle.item.TooltipItem;
 import slimeknights.mantle.registration.deferred.BlockEntityTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.deferred.MenuTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.SynchronizedDeferredRegister;
-import slimeknights.mantle.util.SupplierCreativeTab;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.registration.BlockDeferredRegisterExtension;
 import slimeknights.tconstruct.common.registration.ConfiguredFeatureDeferredRegister;
@@ -40,12 +33,6 @@ import slimeknights.tconstruct.common.registration.EnumDeferredRegister;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
 import slimeknights.tconstruct.common.registration.PlacedFeatureDeferredRegister;
 import slimeknights.tconstruct.library.recipe.TinkerRecipeTypes;
-import slimeknights.tconstruct.shared.TinkerCommons;
-import slimeknights.tconstruct.shared.block.SlimeType;
-
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 /**
  * Contains base helpers for all Tinker modules. Should not be extended by other mods, this is only for internal usage.
  */
@@ -76,18 +63,6 @@ public abstract class TinkerModule {
   protected static final PlacedFeatureDeferredRegister PLACED_FEATURES = new PlacedFeatureDeferredRegister(TConstruct.MOD_ID);
   protected static final ConfiguredFeatureDeferredRegister CONFIGURED_FEATURES = new ConfiguredFeatureDeferredRegister(TConstruct.MOD_ID);
   //
-
-  /** Creative tab for items that do not fit in another tab */
-  @SuppressWarnings("WeakerAccess")
-  public static final CreativeModeTab TAB_GENERAL = new SupplierCreativeTab(TConstruct.MOD_ID, "general", () -> new ItemStack(TinkerCommons.slimeball.get(SlimeType.SKY)));
-
-  // base item properties
-  protected static final Item.Properties HIDDEN_PROPS = new Item.Properties();
-  protected static final Item.Properties GENERAL_PROPS = new Item.Properties().tab(TAB_GENERAL);
-  protected static final Function<Block,? extends BlockItem> HIDDEN_BLOCK_ITEM = (b) -> new BlockItem(b, HIDDEN_PROPS);
-  protected static final Function<Block,? extends BlockItem> GENERAL_BLOCK_ITEM = (b) -> new BlockItem(b, GENERAL_PROPS);
-  protected static final Function<Block,? extends BlockItem> GENERAL_TOOLTIP_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, GENERAL_PROPS);
-  protected static final Supplier<Item> TOOLTIP_ITEM = () -> new TooltipItem(GENERAL_PROPS);
 
   /** Called during construction to initialize the registers for this mod */
   public static void initRegisters() {

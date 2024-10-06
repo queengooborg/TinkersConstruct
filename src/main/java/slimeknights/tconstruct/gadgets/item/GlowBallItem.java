@@ -20,7 +20,7 @@ import java.util.List;
 public class GlowBallItem extends SnowballItem {
 
   public GlowBallItem() {
-    super((new Properties()).stacksTo(16).tab(TinkerGadgets.TAB_GADGETS));
+    super((new Properties()).stacksTo(16));
   }
 
   @Override
