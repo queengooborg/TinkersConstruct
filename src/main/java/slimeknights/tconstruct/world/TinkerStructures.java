@@ -1,7 +1,8 @@
 package slimeknights.tconstruct.world;
 
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -65,11 +66,11 @@ import static slimeknights.tconstruct.TConstruct.getResource;
 public final class TinkerStructures extends TinkerModule {
   static final Logger log = Util.getLogger("tinker_structures");
   private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, TConstruct.MOD_ID);
-    private static final DeferredRegister<StructureType<?>> STRUCTURE_TYPE = DeferredRegister.create(Registry.STRUCTURE_TYPE_REGISTRY, TConstruct.MOD_ID);
-  private static final DeferredRegister<StructurePieceType> STRUCTURE_PIECE = DeferredRegister.create(Registry.STRUCTURE_PIECE_REGISTRY, TConstruct.MOD_ID);
+    private static final DeferredRegister<StructureType<?>> STRUCTURE_TYPE = DeferredRegister.create(Registries.STRUCTURE_TYPE, TConstruct.MOD_ID);
+  private static final DeferredRegister<StructurePieceType> STRUCTURE_PIECE = DeferredRegister.create(Registries.STRUCTURE_PIECE, TConstruct.MOD_ID);
   private static final DeferredRegister<BlockStateProviderType<?>> BLOCK_STATE_PROVIDER_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_STATE_PROVIDER_TYPES, TConstruct.MOD_ID);
-  private static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(Registry.TREE_DECORATOR_TYPE_REGISTRY, TConstruct.MOD_ID);
-  private static final DeferredRegister<RootPlacerType<?>> ROOT_PLACERS = DeferredRegister.create(Registry.ROOT_PLACER_TYPE_REGISTRY, TConstruct.MOD_ID);
+  private static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, TConstruct.MOD_ID);
+  private static final DeferredRegister<RootPlacerType<?>> ROOT_PLACERS = DeferredRegister.create(Registries.ROOT_PLACER_TYPE, TConstruct.MOD_ID);
 
 
   public TinkerStructures() {
@@ -138,7 +139,7 @@ public final class TinkerStructures extends TinkerModule {
   public static final RegistryObject<ConfiguredFeature<TreeConfiguration,Feature<TreeConfiguration>>> enderSlimeTree = CONFIGURED_FEATURES.registerSupplier(
     "ender_slime_tree", () -> Feature.TREE,
     () -> new TreeConfigurationBuilder(BlockStateProvider.simple(TinkerWorld.enderbark.getLog()),
-                                 new UpwardsBranchingTrunkPlacer(2, 1, 4, UniformInt.of(1, 4), 0.5F, UniformInt.of(0, 1), Registry.BLOCK.getOrCreateTag(TinkerTags.Blocks.ENDERBARK_LOGS_CAN_GROW_THROUGH)),
+                                 new UpwardsBranchingTrunkPlacer(2, 1, 4, UniformInt.of(1, 4), 0.5F, UniformInt.of(0, 1), BuiltInRegistries.BLOCK.getOrCreateTag(TinkerTags.Blocks.ENDERBARK_LOGS_CAN_GROW_THROUGH)),
                                  BlockStateProvider.simple(TinkerWorld.slimeLeaves.get(FoliageType.ENDER)),
                                  new RandomSpreadFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(2), 70),
                                  ExtraRootVariantPlacer.builder()
@@ -155,7 +156,7 @@ public final class TinkerStructures extends TinkerModule {
   public static final RegistryObject<ConfiguredFeature<TreeConfiguration,Feature<TreeConfiguration>>> enderSlimeTreeTall = CONFIGURED_FEATURES.registerSupplier(
     "ender_slime_tree_tall", () -> Feature.TREE,
     () -> new TreeConfigurationBuilder(BlockStateProvider.simple(TinkerWorld.enderbark.getLog()),
-                                       new UpwardsBranchingTrunkPlacer(4, 1, 9, UniformInt.of(1, 6), 0.5F, UniformInt.of(0, 1), Registry.BLOCK.getOrCreateTag(TinkerTags.Blocks.ENDERBARK_LOGS_CAN_GROW_THROUGH)),
+                                       new UpwardsBranchingTrunkPlacer(4, 1, 9, UniformInt.of(1, 6), 0.5F, UniformInt.of(0, 1), BuiltInRegistries.BLOCK.getOrCreateTag(TinkerTags.Blocks.ENDERBARK_LOGS_CAN_GROW_THROUGH)),
                                        BlockStateProvider.simple(TinkerWorld.slimeLeaves.get(FoliageType.ENDER)),
                                        new RandomSpreadFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(2), 70),
                                        ExtraRootVariantPlacer.builder()
@@ -202,11 +203,11 @@ public final class TinkerStructures extends TinkerModule {
   public static final RegistryObject<StructurePieceType> islandPiece = STRUCTURE_PIECE.register("island", () -> IslandPiece::new);
   public static final RegistryObject<StructureType<IslandStructure>> island = STRUCTURE_TYPE.register("island", () -> () -> IslandStructure.CODEC);
   // island keys, they are registered in JSON
-  public static final ResourceKey<Structure> earthSlimeIsland = ResourceKey.create(Registry.STRUCTURE_REGISTRY, getResource("earth_slime_island"));
-  public static final ResourceKey<Structure> skySlimeIsland = ResourceKey.create(Registry.STRUCTURE_REGISTRY, getResource("sky_slime_island"));
-  public static final ResourceKey<Structure> clayIsland = ResourceKey.create(Registry.STRUCTURE_REGISTRY, getResource("clay_island"));
-  public static final ResourceKey<Structure> bloodIsland = ResourceKey.create(Registry.STRUCTURE_REGISTRY, getResource("blood_island"));
-  public static final ResourceKey<Structure> endSlimeIsland = ResourceKey.create(Registry.STRUCTURE_REGISTRY, getResource("end_slime_island"));
+  public static final ResourceKey<Structure> earthSlimeIsland = ResourceKey.create(Registries.STRUCTURE, getResource("earth_slime_island"));
+  public static final ResourceKey<Structure> skySlimeIsland = ResourceKey.create(Registries.STRUCTURE, getResource("sky_slime_island"));
+  public static final ResourceKey<Structure> clayIsland = ResourceKey.create(Registries.STRUCTURE, getResource("clay_island"));
+  public static final ResourceKey<Structure> bloodIsland = ResourceKey.create(Registries.STRUCTURE, getResource("blood_island"));
+  public static final ResourceKey<Structure> endSlimeIsland = ResourceKey.create(Registries.STRUCTURE, getResource("end_slime_island"));
 
   @SubscribeEvent
   void gatherData(final GatherDataEvent event) {

@@ -20,9 +20,6 @@ import slimeknights.tconstruct.tools.stats.LimbMaterialStats;
 import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public final class TinkerToolParts extends TinkerModule {
   /** Tab for all tool parts */
   public static final CreativeModeTab TAB_TOOL_PARTS = new SupplierCreativeTab(TConstruct.MOD_ID, "tool_parts", () -> {

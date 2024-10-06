@@ -1,6 +1,6 @@
 package slimeknights.tconstruct.tables.data;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -227,7 +227,7 @@ public class TableRecipeProvider extends BaseRecipeProvider {
     String damageFolder = folder + "tinker_station_damaging/";
     BiFunction<Item,Potion,PartialNBTIngredient> potionIngredient = (item, potion) -> {
       CompoundTag tag = new CompoundTag();
-      tag.putString("Potion", Registry.POTION.getKey(potion).toString());
+      tag.putString("Potion", BuiltInRegistries.POTION.getKey(potion).toString());
       return PartialNBTIngredient.of(item, tag);
     };
     TinkerStationDamagingRecipeBuilder.damage(potionIngredient.apply(Items.POTION, Potions.MUNDANE), 1)

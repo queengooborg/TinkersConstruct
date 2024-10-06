@@ -1,6 +1,6 @@
 package slimeknights.tconstruct.common.data.tags;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 public class BlockEntityTypeTagProvider extends TagsProvider<BlockEntityType<?>> {
   @SuppressWarnings("deprecation")
   public BlockEntityTypeTagProvider(DataGenerator generatorIn, @Nullable ExistingFileHelper existingFileHelper) {
-    super(generatorIn, Registry.BLOCK_ENTITY_TYPE, TConstruct.MOD_ID, existingFileHelper);
+    super(generatorIn, BuiltInRegistries.BLOCK_ENTITY_TYPE, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override

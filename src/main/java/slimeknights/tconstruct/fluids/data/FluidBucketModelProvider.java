@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.fluids.data;
 
 import com.google.gson.JsonObject;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
@@ -29,14 +29,14 @@ public class FluidBucketModelProvider extends GenericDataProvider {
     // using our own model as the forge one expects us to use item colors to handle tints, when we could just bake it in
     json.addProperty("loader", "tconstruct:fluid_container");
     json.addProperty("flip_gas", bucket.getFluid().getFluidType().isLighterThanAir());
-    json.addProperty("fluid", Registry.FLUID.getKey(bucket.getFluid()).toString());
+    json.addProperty("fluid", BuiltInRegistries.FLUID.getKey(bucket.getFluid()).toString());
     return json;
   }
 
   @Override
   public void run(CachedOutput cache) throws IOException {
     // loop over all liquid blocks, adding a blockstate for them
-    for (Entry<ResourceKey<Item>,Item> entry : Registry.ITEM.entrySet()) {
+    for (Entry<ResourceKey<Item>,Item> entry : BuiltInRegistries.ITEM.entrySet()) {
       ResourceLocation id = entry.getKey().location();
       if (id.getNamespace().equals(modId) && entry.getValue() instanceof BucketItem bucket) {
         saveJson(cache, id, makeJson(bucket));

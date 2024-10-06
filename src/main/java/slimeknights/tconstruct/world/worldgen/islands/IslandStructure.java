@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -37,8 +37,8 @@ public class IslandStructure extends Structure {
                IslandPlacement.CODEC.fieldOf("placement").forGetter(s -> s.placement),
                SimpleWeightedRandomList.wrappedCodec(ResourceLocation.CODEC).fieldOf("templates").forGetter(s -> s.templates),
                SimpleWeightedRandomList.wrappedCodec(ConfiguredFeature.CODEC).fieldOf("trees").forGetter(s -> s.trees),
-               Registry.BLOCK.byNameCodec().optionalFieldOf("vines").forGetter(s -> s.vines),
-               SimpleWeightedRandomList.wrappedCodec(Registry.BLOCK.byNameCodec()).fieldOf("grasses").forGetter(s -> s.grasses)))
+               BuiltInRegistries.BLOCK.byNameCodec().optionalFieldOf("vines").forGetter(s -> s.vines),
+               SimpleWeightedRandomList.wrappedCodec(BuiltInRegistries.BLOCK.byNameCodec()).fieldOf("grasses").forGetter(s -> s.grasses)))
         .apply(inst, IslandStructure::new));
 
   @Getter

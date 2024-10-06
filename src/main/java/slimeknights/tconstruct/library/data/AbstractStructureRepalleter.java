@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.nbt.CompoundTag;
@@ -131,7 +131,7 @@ public abstract class AbstractStructureRepalleter extends GenericNBTProvider {
 
     /** Adds a mapping replacing from with to */
     public Replacement addMapping(Block from, Block to) {
-      return addMapping(Registry.BLOCK.getKey(from), Registry.BLOCK.getKey(to));
+      return addMapping(BuiltInRegistries.BLOCK.getKey(from), BuiltInRegistries.BLOCK.getKey(to));
     }
 
     /** Builds this replacement */

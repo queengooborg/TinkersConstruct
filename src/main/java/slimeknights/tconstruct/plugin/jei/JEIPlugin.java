@@ -23,7 +23,7 @@ import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
@@ -371,7 +371,7 @@ public class JEIPlugin implements IModPlugin {
 
   /** Helper to get an item tag */
   private static ITag<Item> getTag(ResourceLocation name) {
-    return getTag(TagKey.create(Registry.ITEM_REGISTRY, name));
+    return getTag(TagKey.create(Registries.ITEM, name));
   }
 
   /** Helper to get an item tag */

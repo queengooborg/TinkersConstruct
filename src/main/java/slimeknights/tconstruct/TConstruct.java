@@ -1,6 +1,6 @@
 package slimeknights.tconstruct;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -178,14 +178,14 @@ public class TConstruct {
 
   /** Handles missing mappings of all types */
   private static void missingMappings(MissingMappingsEvent event) {
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.BLOCK_REGISTRY, name -> {
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.BLOCK, name -> {
       // no item form so we handle it directly
       if (name.equals("blood_fluid")) {
         return TinkerFluids.earthSlime.getBlock();
       }
       return missingBlock(name);
     });
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.ITEM_REGISTRY, name -> switch (name) {
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.ITEM, name -> switch (name) {
       // slings are modifiers now
       case "earth_slime_sling" -> TinkerTools.earthStaff.get();
       case "sky_slime_sling" -> TinkerTools.skyStaff.get();
@@ -207,13 +207,13 @@ public class TConstruct {
         yield block == null ? null : block.asItem();
       }
     });
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.FLUID_REGISTRY, name -> switch (name) {
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.FLUID, name -> switch (name) {
       case "blood" -> TinkerFluids.earthSlime.getStill();
       case "flowing_blood" -> TinkerFluids.earthSlime.getFlowing();
       default -> null;
     });
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.ENTITY_TYPE_REGISTRY, name -> name.equals("earth_slime") ? EntityType.SLIME : null);
-    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registry.MOB_EFFECT_REGISTRY, name -> switch (name) {
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.ENTITY_TYPE, name -> name.equals("earth_slime") ? EntityType.SLIME : null);
+    RegistrationHelper.handleMissingMappings(event, MOD_ID, Registries.MOB_EFFECT, name -> switch (name) {
       case "momentum" -> TinkerModifiers.momentumEffect.get(ToolType.HARVEST);
       case "insatiable" -> TinkerModifiers.insatiableEffect.get(ToolType.MELEE);
       default -> null;

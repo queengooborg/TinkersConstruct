@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.tools.modifiers.effect;
 
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.item.ItemStack;
 import slimeknights.tconstruct.common.TinkerEffect;
 
 import java.util.ArrayList;

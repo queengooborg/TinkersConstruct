@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.library.data.tinkering;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -49,7 +49,7 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
 
   /** Defines the given ID as a tool definition */
   protected ToolDefinitionDataBuilder define(ItemLike item) {
-    return define(Registry.ITEM.getKey(item.asItem()));
+    return define(BuiltInRegistries.ITEM.getKey(item.asItem()));
   }
 
   /** Defines the given ID as a tool definition */

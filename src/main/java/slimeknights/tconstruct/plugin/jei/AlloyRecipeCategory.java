@@ -28,7 +28,7 @@ import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipe;
 import slimeknights.tconstruct.plugin.jei.melting.MeltingFuelHandler;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 
 /**

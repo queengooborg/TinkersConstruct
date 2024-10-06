@@ -1,7 +1,7 @@
 package slimeknights.tconstruct.fluids.data;
 
 import com.google.gson.JsonObject;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
@@ -33,7 +33,7 @@ public class FluidBlockstateModelProvider extends GenericDataProvider {
     blockstate.add("variants", variants);
 
     // loop over all liquid blocks, adding a blockstate for them
-    for (Entry<ResourceKey<Block>,Block> entry : Registry.BLOCK.entrySet()) {
+    for (Entry<ResourceKey<Block>,Block> entry : BuiltInRegistries.BLOCK.entrySet()) {
       ResourceLocation id = entry.getKey().location();
       if (id.getNamespace().equals(modId) && entry.getValue() instanceof LiquidBlock) {
         saveJson(cache, id, blockstate);
