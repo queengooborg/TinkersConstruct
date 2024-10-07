@@ -56,8 +56,7 @@ public class SideButtonsWidget<T extends Button> implements Renderable, GuiEvent
       T button = this.buttons.get(i);
       int x = (i % columns) * (button.getWidth() + SPACING);
       int y = (i / columns) * (button.getHeight() + SPACING);
-      button.x = leftPos + x;
-      button.y = topPos + y;
+      button.setPosition(this.leftPos + x, this.topPos + y);
     }
   }
 

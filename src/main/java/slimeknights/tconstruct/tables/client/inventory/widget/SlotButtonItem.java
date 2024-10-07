@@ -48,18 +48,18 @@ public class SlotButtonItem extends Button {
     RenderUtils.setup(this.backgroundLocation);
 
     if (this.visible) {
-      this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
+      this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
 
       if (this.pressed) {
-        this.pressedGui.draw(matrices, this.x, this.y);
+        this.pressedGui.draw(matrices, this.getX(), this.getY());
       } else if (this.isHovered) {
-        this.hoverGui.draw(matrices, this.x, this.y);
+        this.hoverGui.draw(matrices, this.getX(), this.getY());
       } else {
-        this.normalGui.draw(matrices, this.x, this.y);
+        this.normalGui.draw(matrices, this.getX(), this.getY());
       }
 
       //this.drawIcon(matrices, Minecraft.getInstance());
-      TinkerStationScreen.renderIcon(matrices, layout.getIcon(), this.x + 1, this.y + 1);
+      TinkerStationScreen.renderIcon(matrices, layout.getIcon(), this.getX() + 1, this.getY() + 1);
     }
   }
 
