@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.common.data.tags;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.TagsProvider;
@@ -19,7 +20,7 @@ public class BlockEntityTypeTagProvider extends TagsProvider<BlockEntityType<?>>
   }
 
   @Override
-  protected void addTags() {
+  protected void addTags(HolderLookup.Provider pProvider) {
     this.tag(TinkerTags.TileEntityTypes.CRAFTING_STATION_BLACKLIST)
         .add(
           BlockEntityType.FURNACE, BlockEntityType.BLAST_FURNACE, BlockEntityType.SMOKER, BlockEntityType.BREWING_STAND,

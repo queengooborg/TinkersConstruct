@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.common.data.tags;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -20,7 +21,7 @@ public class EnchantmentTagProvider extends TagsProvider<Enchantment> {
   }
 
   @Override
-  protected void addTags() {
+  protected void addTags(HolderLookup.Provider pProvider) {
     // upgrade
     modifierTag(ModifierIds.experienced, "cyclic:experience_boost", "ensorcellation:exp_boost");
     modifierTag(ModifierIds.killager, "ensorcellation:damage_illager");

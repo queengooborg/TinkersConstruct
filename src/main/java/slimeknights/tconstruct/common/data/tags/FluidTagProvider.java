@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.common.data.tags;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.FluidTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -17,7 +18,7 @@ public class FluidTagProvider extends FluidTagsProvider {
   }
 
   @Override
-  public void addTags() {
+  public void addTags(HolderLookup.Provider pProvider) {
     // first, register common tags
     // slime
     tagAll(TinkerFluids.earthSlime);

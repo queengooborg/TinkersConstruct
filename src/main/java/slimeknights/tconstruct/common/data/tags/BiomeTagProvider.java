@@ -1,5 +1,6 @@
 package slimeknights.tconstruct.common.data.tags;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -29,7 +30,7 @@ public class BiomeTagProvider extends BiomeTagsProvider {
   }
 
   @Override
-  protected void addTags() {
+  protected void addTags(HolderLookup.Provider pProvider) {
     this.tag(TinkerTags.Biomes.CLAY_ISLANDS).addTags(IS_DEEP_OCEAN, IS_OCEAN, IS_BEACH, IS_RIVER, IS_MOUNTAIN, IS_BADLANDS, IS_HILL);
     this.tag(TinkerTags.Biomes.EARTHSLIME_ISLANDS).addTags(IS_DEEP_OCEAN, IS_OCEAN);
     this.tag(TinkerTags.Biomes.SKYSLIME_ISLANDS).addTags(IS_DEEP_OCEAN, IS_OCEAN, IS_BEACH, IS_RIVER, IS_MOUNTAIN, IS_BADLANDS, IS_HILL, IS_TAIGA, IS_FOREST);
