@@ -25,7 +25,7 @@ import static net.minecraft.world.level.biome.Biomes.SMALL_END_ISLANDS;
 public class BiomeTagProvider extends BiomeTagsProvider {
 
   public BiomeTagProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
-    super(generatorIn, TConstruct.MOD_ID, existingFileHelper);
+    super(generatorIn.getPackOutput(), TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override

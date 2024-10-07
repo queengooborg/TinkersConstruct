@@ -41,7 +41,7 @@ import slimeknights.tconstruct.tools.modifiers.loot.ModifierBonusLootFunction;
 
 public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
   public GlobalLootModifiersProvider(DataGenerator gen) {
-    super(gen, TConstruct.MOD_ID);
+    super(gen.getPackOutput(), TConstruct.MOD_ID);
   }
 
   @Override

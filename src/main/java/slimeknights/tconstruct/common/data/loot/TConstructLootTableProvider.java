@@ -24,7 +24,7 @@ public class TConstructLootTableProvider extends LootTableProvider {
   private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> lootTables = ImmutableList.of(Pair.of(BlockLootTableProvider::new, LootContextParamSets.BLOCK), Pair.of(AdvancementLootTableProvider::new, LootContextParamSets.ADVANCEMENT_REWARD), Pair.of(EntityLootTableProvider::new, LootContextParamSets.ENTITY));
 
   public TConstructLootTableProvider(DataGenerator gen) {
-    super(gen);
+    super(gen.getPackOutput());
   }
 
   @Override

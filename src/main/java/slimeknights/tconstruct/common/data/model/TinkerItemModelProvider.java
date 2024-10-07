@@ -22,7 +22,7 @@ import static slimeknights.tconstruct.TConstruct.getResource;
 @SuppressWarnings("UnusedReturnValue")
 public class TinkerItemModelProvider extends ItemModelProvider {
   public TinkerItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-    super(generator, TConstruct.MOD_ID, existingFileHelper);
+    super(generator.getPackOutput(), TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override

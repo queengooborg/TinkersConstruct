@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 public class BlockEntityTypeTagProvider extends TagsProvider<BlockEntityType<?>> {
   @SuppressWarnings("deprecation")
   public BlockEntityTypeTagProvider(DataGenerator generatorIn, @Nullable ExistingFileHelper existingFileHelper) {
-    super(generatorIn, BuiltInRegistries.BLOCK_ENTITY_TYPE, TConstruct.MOD_ID, existingFileHelper);
+    super(generatorIn.getPackOutput(), BuiltInRegistries.BLOCK_ENTITY_TYPE, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override

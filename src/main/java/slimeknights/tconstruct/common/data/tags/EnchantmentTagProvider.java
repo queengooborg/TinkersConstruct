@@ -16,7 +16,7 @@ import slimeknights.tconstruct.tools.data.ModifierIds;
 
 public class EnchantmentTagProvider extends TagsProvider<Enchantment> {
   public EnchantmentTagProvider(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-    super(generator, BuiltInRegistries.ENCHANTMENT, TConstruct.MOD_ID, existingFileHelper);
+    super(generator.getPackOutput(), BuiltInRegistries.ENCHANTMENT, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override
