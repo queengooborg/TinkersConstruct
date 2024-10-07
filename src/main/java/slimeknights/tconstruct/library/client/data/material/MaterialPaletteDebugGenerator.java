@@ -11,6 +11,7 @@ import slimeknights.tconstruct.library.client.data.spritetransformer.RecolorSpri
 
 import java.io.IOException;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 
 /** Simple generator that generates a texture showing the entire range for a palette */
 public class MaterialPaletteDebugGenerator extends GenericTextureGenerator {
@@ -23,24 +24,31 @@ public class MaterialPaletteDebugGenerator extends GenericTextureGenerator {
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    for (AbstractMaterialSpriteProvider materialProvider : materialProviders) {
-      for (Entry<ResourceLocation,MaterialSpriteInfo> entry : materialProvider.getMaterials().entrySet()) {
-        if (entry.getValue().getTransformer() instanceof RecolorSpriteTransformer recolor) {
-          IColorMapping colorMapping = recolor.getColorMapping();
-          NativeImage palette = new NativeImage(256, 16, true);
-          for (int grey = 0; grey < 256; grey++) {
-            // set the grey value to RGB, leave alpha as 255
-            int color = colorMapping.mapColor(grey | (grey << 8) | (grey << 16) | 0xFF000000);
-            for (int height = 0; height < 16; height++) {
-              palette.setPixelRGBA(grey, height, color);
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      for (AbstractMaterialSpriteProvider materialProvider : materialProviders) {
+        for (Entry<ResourceLocation, MaterialSpriteInfo> entry : materialProvider.getMaterials().entrySet()) {
+          if (entry.getValue().getTransformer() instanceof RecolorSpriteTransformer recolor) {
+            IColorMapping colorMapping = recolor.getColorMapping();
+            NativeImage palette = new NativeImage(256, 16, true);
+            for (int grey = 0; grey < 256; grey++) {
+              // set the grey value to RGB, leave alpha as 255
+              int color = colorMapping.mapColor(grey | (grey << 8) | (grey << 16) | 0xFF000000);
+              for (int height = 0; height < 16; height++) {
+                palette.setPixelRGBA(grey, height, color);
+              }
+            }
+            try {
+              saveImage(cache, entry.getKey(), palette);
+            } catch (IOException e) {
+              throw new RuntimeException(e);
+            } finally {
+              palette.close();
             }
           }
-          saveImage(cache, entry.getKey(), palette);
-          palette.close();
         }
       }
-    }
+    });
   }
 
   @Override

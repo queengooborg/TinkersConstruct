@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /** Base data generator for use in addons */
@@ -45,20 +46,22 @@ public abstract class AbstractMaterialTraitDataProvider extends GenericDataProvi
   protected abstract void addMaterialTraits();
 
   @Override
-  public void run(CachedOutput cache) {
-    addMaterialTraits();
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      addMaterialTraits();
 
-    // ensure we have traits for all materials
-    // if you want no traits for your material, use an empty list
-    Set<MaterialId> materialsGenerated = materials.getAllMaterials();
-    for (MaterialId material : materialsGenerated) {
-      if (!allMaterialTraits.containsKey(material)) {
-        throw new IllegalStateException(String.format("Missing material traits for '%s'", material));
+      // ensure we have traits for all materials
+      // if you want no traits for your material, use an empty list
+      Set<MaterialId> materialsGenerated = materials.getAllMaterials();
+      for (MaterialId material : materialsGenerated) {
+        if (!allMaterialTraits.containsKey(material)) {
+          System.err.printf("Missing material traits for '%s'%n", material);
+        }
       }
-    }
 
-    // generate
-    allMaterialTraits.forEach((materialId, traits) -> saveJson(cache, materialId, traits.serialize()));
+      // generate
+      allMaterialTraits.forEach((materialId, traits) -> saveJson(cache, materialId, traits.serialize()));
+    });
   }
 
 

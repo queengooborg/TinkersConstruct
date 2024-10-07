@@ -14,6 +14,7 @@ import slimeknights.tconstruct.library.tools.layout.StationSlotLayoutLoader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 /** Base data generator to generate station slot layouts */
@@ -64,8 +65,10 @@ public abstract class AbstractStationSlotLayoutProvider extends GenericDataProvi
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    addLayouts();
-    allLayouts.forEach((id, builder) -> saveJson(cache, id, builder.build()));
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      addLayouts();
+      allLayouts.forEach((id, builder) -> saveJson(cache, id, builder.build()));
+    });
   }
 }

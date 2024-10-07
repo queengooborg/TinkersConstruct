@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -54,21 +55,23 @@ public abstract class AbstractTagProvider<T> extends GenericDataProvider {
   protected abstract void addTags();
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    this.builders.clear();
-    this.addTags();
-    this.builders.forEach((id, builder) -> {
-      List<TagEntry> tagEntries = builder.build();
-      List<TagEntry> invalidEntries = tagEntries.stream()
-                                                .filter((value) -> !value.verifyIfPresent(staticValuePredicate, this.builders::containsKey))
-                                                .filter(this::missing)
-                                                .toList();
-      if (!invalidEntries.isEmpty()) {
-        throw new IllegalArgumentException(String.format("Couldn't define tag %s as it is missing following references: %s", id, invalidEntries.stream().map(Objects::toString).collect(Collectors.joining(","))));
-      } else {
-        // TODO: replace does not work, but that is a forge bug. Fix whenever forge adds the getter
-        saveJson(cache, id, TagFile.CODEC.encodeStart(JsonOps.INSTANCE, new TagFile(tagEntries, false)).getOrThrow(false, TConstruct.LOG::error));
-      }
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      this.builders.clear();
+      this.addTags();
+      this.builders.forEach((id, builder) -> {
+        List<TagEntry> tagEntries = builder.build();
+        List<TagEntry> invalidEntries = tagEntries.stream()
+          .filter((value) -> !value.verifyIfPresent(staticValuePredicate, this.builders::containsKey))
+          .filter(this::missing)
+          .toList();
+        if (!invalidEntries.isEmpty()) {
+          throw new IllegalArgumentException(String.format("Couldn't define tag %s as it is missing following references: %s", id, invalidEntries.stream().map(Objects::toString).collect(Collectors.joining(","))));
+        } else {
+          // TODO: replace does not work, but that is a forge bug. Fix whenever forge adds the getter
+          saveJson(cache, id, TagFile.CODEC.encodeStart(JsonOps.INSTANCE, new TagFile(tagEntries, false)).getOrThrow(false, TConstruct.LOG::error));
+        }
+      });
     });
   }
 

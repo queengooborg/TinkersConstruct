@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -63,27 +64,29 @@ public abstract class AbstractToolDefinitionDataProvider extends GenericDataProv
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    addToolDefinitions();
-    Map<ResourceLocation,ToolDefinition> relevantDefinitions = ToolDefinitionLoader.getInstance().getRegisteredToolDefinitions().stream()
-                                                                                   .filter(def -> def.getId().getNamespace().equals(modId))
-                                                                                   .collect(Collectors.toMap(ToolDefinition::getId, Function.identity()));
-    // ensure all required definitions are included
-    for (ToolDefinition definition : relevantDefinitions.values()) {
-      ResourceLocation name = definition.getId();
-      if (!allTools.containsKey(name)) {
-        throw new IllegalStateException(String.format("Missing tool definition for '%s'", name));
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      addToolDefinitions();
+      Map<ResourceLocation, ToolDefinition> relevantDefinitions = ToolDefinitionLoader.getInstance().getRegisteredToolDefinitions().stream()
+        .filter(def -> def.getId().getNamespace().equals(modId))
+        .collect(Collectors.toMap(ToolDefinition::getId, Function.identity()));
+      // ensure all required definitions are included
+      for (ToolDefinition definition : relevantDefinitions.values()) {
+        ResourceLocation name = definition.getId();
+        if (!allTools.containsKey(name)) {
+          throw new IllegalStateException(String.format("Missing tool definition for '%s'", name));
+        }
       }
-    }
-    // ensure all included ones are required, and the built ones are valid
-    for (Entry<ResourceLocation,ToolDefinitionDataBuilder> entry : allTools.entrySet()) {
-      ResourceLocation id = entry.getKey();
-      ToolDefinition definition = relevantDefinitions.get(id);
-      if (definition == null) {
-        throw new IllegalStateException("Unknown tool definition with ID " + id);
+      // ensure all included ones are required, and the built ones are valid
+      for (Entry<ResourceLocation, ToolDefinitionDataBuilder> entry : allTools.entrySet()) {
+        ResourceLocation id = entry.getKey();
+        ToolDefinition definition = relevantDefinitions.get(id);
+        if (definition == null) {
+          throw new IllegalStateException("Unknown tool definition with ID " + id);
+        }
+        saveJson(cache, id, ToolDefinitionData.LOADABLE.serialize(entry.getValue().build()));
       }
-      saveJson(cache, id, ToolDefinitionData.LOADABLE.serialize(entry.getValue().build()));
-    }
+    });
   }
 
   /** Builder for an armor material to batch certain hooks */

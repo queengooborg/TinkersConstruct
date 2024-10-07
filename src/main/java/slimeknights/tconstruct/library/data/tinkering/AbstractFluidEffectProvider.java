@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 /** Data provider for spilling fluids */
 public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
@@ -54,9 +55,11 @@ public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
   protected abstract void addFluids();
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    addFluids();
-    entries.forEach((id, data) -> saveJson(cache, id, data.build()));
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      addFluids();
+      entries.forEach((id, data) -> saveJson(cache, id, data.build()));
+    });
   }
 
   /* Helpers */

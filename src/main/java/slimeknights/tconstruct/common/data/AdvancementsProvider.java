@@ -81,6 +81,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -438,23 +439,25 @@ public class AdvancementsProvider extends GenericDataProvider {
   }
 
   @Override
-  public void run(CachedOutput cache) {
-    Set<ResourceLocation> set = Sets.newHashSet();
-    this.advancementConsumer = advancement -> {
-      if (!set.add(advancement.getId())) {
-        throw new IllegalStateException("Duplicate advancement " + advancement.getId());
-      } else {
-        saveJson(cache, advancement.getId(), advancement.deconstruct().serializeToJson());
-      }
-    };
-    this.conditionalConsumer = (id, advancement) -> {
-      if (!set.add(id)) {
-        throw new IllegalStateException("Duplicate advancement " + id);
-      } else {
-        saveJson(cache, id, advancement.write());
-      }
-    };
-    generate();
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      Set<ResourceLocation> set = Sets.newHashSet();
+      this.advancementConsumer = advancement -> {
+        if (!set.add(advancement.getId())) {
+          throw new IllegalStateException("Duplicate advancement " + advancement.getId());
+        } else {
+          saveJson(cache, advancement.getId(), advancement.deconstruct().serializeToJson());
+        }
+      };
+      this.conditionalConsumer = (id, advancement) -> {
+        if (!set.add(id)) {
+          throw new IllegalStateException("Duplicate advancement " + id);
+        } else {
+          saveJson(cache, id, advancement.write());
+        }
+      };
+      generate();
+    });
   }
 
 

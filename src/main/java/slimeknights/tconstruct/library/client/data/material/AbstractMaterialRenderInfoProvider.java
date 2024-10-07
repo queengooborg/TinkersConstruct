@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 /** Base data generator for use in addons */
 @SuppressWarnings("unused")  // API
@@ -43,16 +44,18 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
   protected abstract void addMaterialRenderInfo();
 
   @Override
-  public void run(CachedOutput cache) {
-    if (existingFileHelper != null) {
-      MaterialPartTextureGenerator.runCallbacks(existingFileHelper, null);
-    }
-    addMaterialRenderInfo();
-    // generate
-    allRenderInfo.forEach((materialId, info) -> saveJson(cache, materialId.getLocation('/'), info.build()));
-    if (existingFileHelper != null) {
-      MaterialPartTextureGenerator.runCallbacks(null, null);
-    }
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      if (existingFileHelper != null) {
+        MaterialPartTextureGenerator.runCallbacks(existingFileHelper, null);
+      }
+      addMaterialRenderInfo();
+      // generate
+      allRenderInfo.forEach((materialId, info) -> saveJson(cache, materialId.getLocation('/'), info.build()));
+      if (existingFileHelper != null) {
+        MaterialPartTextureGenerator.runCallbacks(null, null);
+      }
+    });
   }
 
 

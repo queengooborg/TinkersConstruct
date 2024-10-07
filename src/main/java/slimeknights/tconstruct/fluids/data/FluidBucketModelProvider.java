@@ -13,6 +13,7 @@ import slimeknights.mantle.data.GenericDataProvider;
 
 import java.io.IOException;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 
 /** Quick and dirty data provider to generate fluid bucket models */
 public class FluidBucketModelProvider extends GenericDataProvider {
@@ -34,14 +35,16 @@ public class FluidBucketModelProvider extends GenericDataProvider {
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    // loop over all liquid blocks, adding a blockstate for them
-    for (Entry<ResourceKey<Item>,Item> entry : BuiltInRegistries.ITEM.entrySet()) {
-      ResourceLocation id = entry.getKey().location();
-      if (id.getNamespace().equals(modId) && entry.getValue() instanceof BucketItem bucket) {
-        saveJson(cache, id, makeJson(bucket));
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      // loop over all liquid blocks, adding a blockstate for them
+      for (Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
+        ResourceLocation id = entry.getKey().location();
+        if (id.getNamespace().equals(modId) && entry.getValue() instanceof BucketItem bucket) {
+          saveJson(cache, id, makeJson(bucket));
+        }
       }
-    }
+    });
   }
 
   @Override

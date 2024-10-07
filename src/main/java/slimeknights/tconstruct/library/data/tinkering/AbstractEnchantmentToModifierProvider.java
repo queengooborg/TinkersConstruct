@@ -11,10 +11,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.tconstruct.TConstruct;
+import slimeknights.tconstruct.library.client.armor.ArmorModelManager;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 /** Data generator for mappings from enchantments to modifiers */
 public abstract class AbstractEnchantmentToModifierProvider extends GenericDataProvider {
@@ -29,10 +31,12 @@ public abstract class AbstractEnchantmentToModifierProvider extends GenericDataP
   protected abstract void addEnchantmentMappings();
 
   @Override
-  public void run(CachedOutput pCache) throws IOException {
-    enchantmentMap.entrySet().clear();
-    addEnchantmentMappings();
-    saveJson(pCache, TConstruct.getResource("enchantments_to_modifiers"), enchantmentMap);
+  public CompletableFuture<?> run(CachedOutput pCache) {
+    return CompletableFuture.runAsync(() -> {
+      enchantmentMap.entrySet().clear();
+      addEnchantmentMappings();
+      saveJson(pCache, TConstruct.getResource("enchantments_to_modifiers"), enchantmentMap);
+    });
   }
 
   /* Helpers */

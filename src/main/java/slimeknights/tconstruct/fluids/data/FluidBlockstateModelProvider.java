@@ -13,6 +13,7 @@ import slimeknights.mantle.data.GenericDataProvider;
 
 import java.io.IOException;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 
 /** Quick and dirty data provider to generate blockstate files for fluids */
 public class FluidBlockstateModelProvider extends GenericDataProvider {
@@ -23,22 +24,24 @@ public class FluidBlockstateModelProvider extends GenericDataProvider {
   }
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    // statically created JSON to reference block/fluid, which is just a dummy model
-    JsonObject normal = new JsonObject();
-    normal.addProperty("model", "tconstruct:block/fluid");
-    JsonObject variants = new JsonObject();
-    variants.add("", normal);
-    JsonObject blockstate = new JsonObject();
-    blockstate.add("variants", variants);
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      // statically created JSON to reference block/fluid, which is just a dummy model
+      JsonObject normal = new JsonObject();
+      normal.addProperty("model", "tconstruct:block/fluid");
+      JsonObject variants = new JsonObject();
+      variants.add("", normal);
+      JsonObject blockstate = new JsonObject();
+      blockstate.add("variants", variants);
 
-    // loop over all liquid blocks, adding a blockstate for them
-    for (Entry<ResourceKey<Block>,Block> entry : BuiltInRegistries.BLOCK.entrySet()) {
-      ResourceLocation id = entry.getKey().location();
-      if (id.getNamespace().equals(modId) && entry.getValue() instanceof LiquidBlock) {
-        saveJson(cache, id, blockstate);
+      // loop over all liquid blocks, adding a blockstate for them
+      for (Entry<ResourceKey<Block>, Block> entry : BuiltInRegistries.BLOCK.entrySet()) {
+        ResourceLocation id = entry.getKey().location();
+        if (id.getNamespace().equals(modId) && entry.getValue() instanceof LiquidBlock) {
+          saveJson(cache, id, blockstate);
+        }
       }
-    }
+    });
   }
 
   @Override

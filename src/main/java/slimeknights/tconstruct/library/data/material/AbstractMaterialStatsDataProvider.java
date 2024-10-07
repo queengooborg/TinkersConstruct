@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /** Base data generator for use in addons, depends on the regular material provider */
@@ -36,19 +37,21 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
   protected abstract void addMaterialStats();
 
   @Override
-  public void run(CachedOutput cache) {
-    addMaterialStats();
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      addMaterialStats();
 
-    // ensure we have stats for all materials
-    Set<MaterialId> materialsGenerated = materials.getAllMaterials();
-    for (MaterialId material : materialsGenerated) {
-      if (!allMaterialStats.containsKey(material)) {
-        throw new IllegalStateException(String.format("Missing material stats for '%s'", material));
+      // ensure we have stats for all materials
+      Set<MaterialId> materialsGenerated = materials.getAllMaterials();
+      for (MaterialId material : materialsGenerated) {
+        if (!allMaterialStats.containsKey(material)) {
+          throw new IllegalStateException(String.format("Missing material stats for '%s'", material));
+        }
       }
-    }
-    // does not ensure we have materials for all stats, we may be adding stats for another mod
-    // generate finally
-    allMaterialStats.forEach((materialId, materialStats) -> saveJson(cache, materialId, convert(materialStats)));
+      // does not ensure we have materials for all stats, we may be adding stats for another mod
+      // generate finally
+      allMaterialStats.forEach((materialId, materialStats) -> saveJson(cache, materialId, convert(materialStats)));
+    });
   }
 
 

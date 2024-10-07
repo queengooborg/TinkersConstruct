@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 import static slimeknights.mantle.util.IdExtender.INSTANCE;
 
@@ -39,10 +40,16 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
   protected abstract void addModels() throws IOException;
 
   @Override
-  public void run(CachedOutput cache) throws IOException {
-    addModels();
-    // no key comparator - I want them sorted in the same order as the input models for easier readability
-    models.forEach((location, object) -> saveJson(cache, new ResourceLocation(modId, location), object, null));
+  public CompletableFuture<?> run(CachedOutput cache) {
+    return CompletableFuture.runAsync(() -> {
+      try {
+        addModels();
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+      // no key comparator - I want them sorted in the same order as the input models for easier readability
+      models.forEach((location, object) -> saveJson(cache, new ResourceLocation(modId, location), object, null));
+    });
   }
 
 
