@@ -2,6 +2,7 @@ package slimeknights.tconstruct.tools.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.ItemStack;
@@ -80,92 +81,130 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
     toolBuilding(consumer, TinkerTools.longbow, folder);
 
     // specialized
-    ShapelessRecipeBuilder.shapeless(TinkerTools.flintAndBrick)
-                          .requires(Items.FLINT)
-                          .requires(Ingredient.of(TinkerSmeltery.searedBrick, TinkerSmeltery.scorchedBrick))
-                          .unlockedBy("has_seared", has(TinkerSmeltery.searedBrick))
-                          .unlockedBy("has_scorched", has(TinkerSmeltery.scorchedBrick))
-                          .save(consumer, prefix(TinkerTools.flintAndBrick, folder));
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, TinkerTools.flintAndBrick)
+      .requires(Items.FLINT)
+      .requires(Ingredient.of(TinkerSmeltery.searedBrick, TinkerSmeltery.scorchedBrick))
+      .unlockedBy("has_seared", has(TinkerSmeltery.searedBrick))
+      .unlockedBy("has_scorched", has(TinkerSmeltery.scorchedBrick))
+      .save(consumer, prefix(TinkerTools.flintAndBrick, folder));
 
     // staff
-    ShapedRecipeBuilder.shaped(TinkerTools.skyStaff)
-                       .pattern("CWC")
-                       .pattern(" I ")
-                       .pattern(" W ")
-                       .define('C', TinkerWorld.skyGeode)
-                       .define('W', TinkerWorld.skyroot.getLogItemTag())
-                       .define('I', TinkerMaterials.roseGold.getIngotTag())
-                       .unlockedBy("has_wood", has(TinkerWorld.skyroot.getLogItemTag()))
-                       .save(consumer, prefix(TinkerTools.skyStaff, folder));
-    ShapedRecipeBuilder.shaped(TinkerTools.earthStaff)
-                       .pattern("CWC")
-                       .pattern(" I ")
-                       .pattern(" W ")
-                       .define('C', TinkerWorld.earthGeode)
-                       .define('W', TinkerWorld.greenheart.getLogItemTag())
-                       .define('I', TinkerMaterials.cobalt.getIngotTag())
-                       .unlockedBy("has_wood", has(TinkerWorld.greenheart.getLogItemTag()))
-                       .save(consumer, prefix(TinkerTools.earthStaff, folder));
-    ShapedRecipeBuilder.shaped(TinkerTools.ichorStaff)
-                       .pattern("CWC")
-                       .pattern(" I ")
-                       .pattern(" W ")
-                       .define('C', TinkerWorld.ichorGeode)
-                       .define('W', TinkerWorld.bloodshroom.getLogItemTag())
-                       .define('I', TinkerMaterials.queensSlime.getIngotTag())
-                       .unlockedBy("has_wood", has(TinkerWorld.bloodshroom.getLogItemTag()))
-                       .save(consumer, prefix(TinkerTools.ichorStaff, folder));
-    ShapedRecipeBuilder.shaped(TinkerTools.enderStaff)
-                       .pattern("CWC")
-                       .pattern(" I ")
-                       .pattern(" W ")
-                       .define('C', TinkerWorld.enderGeode)
-                       .define('W', TinkerWorld.enderbark.getLogItemTag())
-                       .define('I', Tags.Items.INGOTS_NETHERITE)
-                       .unlockedBy("has_wood", has(TinkerWorld.enderbark.getLogItemTag()))
-                       .save(consumer, prefix(TinkerTools.enderStaff, folder));
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.skyStaff)
+      .pattern("CWC")
+      .pattern(" I ")
+      .pattern(" W ")
+      .define('C', TinkerWorld.skyGeode)
+      .define('W', TinkerWorld.skyroot.getLogItemTag())
+      .define('I', TinkerMaterials.roseGold.getIngotTag())
+      .unlockedBy("has_wood", has(TinkerWorld.skyroot.getLogItemTag()))
+      .save(consumer, prefix(TinkerTools.skyStaff, folder));
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.earthStaff)
+      .pattern("CWC")
+      .pattern(" I ")
+      .pattern(" W ")
+      .define('C', TinkerWorld.earthGeode)
+      .define('W', TinkerWorld.greenheart.getLogItemTag())
+      .define('I', TinkerMaterials.cobalt.getIngotTag())
+      .unlockedBy("has_wood", has(TinkerWorld.greenheart.getLogItemTag()))
+      .save(consumer, prefix(TinkerTools.earthStaff, folder));
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.ichorStaff)
+      .pattern("CWC")
+      .pattern(" I ")
+      .pattern(" W ")
+      .define('C', TinkerWorld.ichorGeode)
+      .define('W', TinkerWorld.bloodshroom.getLogItemTag())
+      .define('I', TinkerMaterials.queensSlime.getIngotTag())
+      .unlockedBy("has_wood", has(TinkerWorld.bloodshroom.getLogItemTag()))
+      .save(consumer, prefix(TinkerTools.ichorStaff, folder));
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.enderStaff)
+      .pattern("CWC")
+      .pattern(" I ")
+      .pattern(" W ")
+      .define('C', TinkerWorld.enderGeode)
+      .define('W', TinkerWorld.enderbark.getLogItemTag())
+      .define('I', Tags.Items.INGOTS_NETHERITE)
+      .unlockedBy("has_wood", has(TinkerWorld.enderbark.getLogItemTag()))
+      .save(consumer, prefix(TinkerTools.enderStaff, folder));
+
+    // staff
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.skyStaff)
+      .pattern("CWC")
+      .pattern(" I ")
+      .pattern(" W ")
+      .define('C', TinkerWorld.skyGeode)
+      .define('W', TinkerWorld.skyroot.getLogItemTag())
+      .define('I', TinkerMaterials.roseGold.getIngotTag())
+      .unlockedBy("has_wood", has(TinkerWorld.skyroot.getLogItemTag()))
+      .save(consumer, prefix(TinkerTools.skyStaff, folder));
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.earthStaff)
+      .pattern("CWC")
+      .pattern(" I ")
+      .pattern(" W ")
+      .define('C', TinkerWorld.earthGeode)
+      .define('W', TinkerWorld.greenheart.getLogItemTag())
+      .define('I', TinkerMaterials.cobalt.getIngotTag())
+      .unlockedBy("has_wood", has(TinkerWorld.greenheart.getLogItemTag()))
+      .save(consumer, prefix(TinkerTools.earthStaff, folder));
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.ichorStaff)
+      .pattern("CWC")
+      .pattern(" I ")
+      .pattern(" W ")
+      .define('C', TinkerWorld.ichorGeode)
+      .define('W', TinkerWorld.bloodshroom.getLogItemTag())
+      .define('I', TinkerMaterials.queensSlime.getIngotTag())
+      .unlockedBy("has_wood", has(TinkerWorld.bloodshroom.getLogItemTag()))
+      .save(consumer, prefix(TinkerTools.ichorStaff, folder));
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, TinkerTools.enderStaff)
+      .pattern("CWC")
+      .pattern(" I ")
+      .pattern(" W ")
+      .define('C', TinkerWorld.enderGeode)
+      .define('W', TinkerWorld.enderbark.getLogItemTag())
+      .define('I', Tags.Items.INGOTS_NETHERITE)
+      .unlockedBy("has_wood", has(TinkerWorld.enderbark.getLogItemTag()))
+      .save(consumer, prefix(TinkerTools.enderStaff, folder));
 
     // travelers gear
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersGear.get(ArmorSlotType.HELMET))
-                       .pattern("l l")
-                       .pattern("glg")
-                       .pattern("c c")
-                       .define('c', Tags.Items.INGOTS_COPPER)
-                       .define('l', Tags.Items.LEATHER)
-                       .define('g', Tags.Items.GLASS_PANES_COLORLESS)
-                       .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
-                       .save(consumer, location(armorFolder + "travelers_goggles"));
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersGear.get(ArmorSlotType.CHESTPLATE))
-                       .pattern("l l")
-                       .pattern("lcl")
-                       .pattern("lcl")
-                       .define('c', Tags.Items.INGOTS_COPPER)
-                       .define('l', Tags.Items.LEATHER)
-                       .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
-                       .save(consumer, location(armorFolder + "travelers_chestplate"));
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersGear.get(ArmorSlotType.LEGGINGS))
-                       .pattern("lll")
-                       .pattern("c c")
-                       .pattern("l l")
-                       .define('c', Tags.Items.INGOTS_COPPER)
-                       .define('l', Tags.Items.LEATHER)
-                       .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
-                       .save(consumer, location(armorFolder + "travelers_pants"));
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersGear.get(ArmorSlotType.BOOTS))
-                       .pattern("c c")
-                       .pattern("l l")
-                       .define('c', Tags.Items.INGOTS_COPPER)
-                       .define('l', Tags.Items.LEATHER)
-                       .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
-                       .save(consumer, location(armorFolder + "travelers_boots"));
-    ShapedRecipeBuilder.shaped(TinkerTools.travelersShield)
-                       .pattern(" w ")
-                       .pattern("wlw")
-                       .pattern(" w ")
-                       .define('l', Tags.Items.LEATHER)
-                       .define('w', TinkerTables.pattern)
-                       .unlockedBy("has_item", has(Tags.Items.LEATHER))
-                       .save(consumer, location(armorFolder + "travelers_shield"));
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersGear.get(ArmorSlotType.HELMET))
+      .pattern("l l")
+      .pattern("glg")
+      .pattern("c c")
+      .define('c', Tags.Items.INGOTS_COPPER)
+      .define('l', Tags.Items.LEATHER)
+      .define('g', Tags.Items.GLASS_PANES_COLORLESS)
+      .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
+      .save(consumer, location(armorFolder + "travelers_goggles"));
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersGear.get(ArmorSlotType.CHESTPLATE))
+      .pattern("l l")
+      .pattern("lcl")
+      .pattern("lcl")
+      .define('c', Tags.Items.INGOTS_COPPER)
+      .define('l', Tags.Items.LEATHER)
+      .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
+      .save(consumer, location(armorFolder + "travelers_chestplate"));
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersGear.get(ArmorSlotType.LEGGINGS))
+      .pattern("lll")
+      .pattern("c c")
+      .pattern("l l")
+      .define('c', Tags.Items.INGOTS_COPPER)
+      .define('l', Tags.Items.LEATHER)
+      .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
+      .save(consumer, location(armorFolder + "travelers_pants"));
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersGear.get(ArmorSlotType.BOOTS))
+      .pattern("c c")
+      .pattern("l l")
+      .define('c', Tags.Items.INGOTS_COPPER)
+      .define('l', Tags.Items.LEATHER)
+      .unlockedBy("has_item", has(Tags.Items.INGOTS_COPPER))
+      .save(consumer, location(armorFolder + "travelers_boots"));
+    ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TinkerTools.travelersShield)
+      .pattern(" w ")
+      .pattern("wlw")
+      .pattern(" w ")
+      .define('l', Tags.Items.LEATHER)
+      .define('w', TinkerTables.pattern)
+      .unlockedBy("has_item", has(Tags.Items.LEATHER))
+      .save(consumer, location(armorFolder + "travelers_shield"));
 
     // plate armor
     TinkerTools.plateArmor.forEach(item -> toolBuilding(consumer, item, armorFolder, TConstruct.getResource("plate_armor")));
