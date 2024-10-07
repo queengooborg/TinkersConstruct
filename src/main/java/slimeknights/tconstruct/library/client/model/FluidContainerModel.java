@@ -159,7 +159,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     // add in the base
     if (baseSprite != null) {
       modelBuilder.addQuads(renderTypes, UnbakedGeometryHelper.bakeElements(
-        UnbakedGeometryHelper.createUnbakedItemElements(0, baseSprite),
+        UnbakedGeometryHelper.createUnbakedItemElements(0, baseSprite.contents()),
         $ -> baseSprite, modelState, modelLocation
       ));
     }
@@ -167,7 +167,7 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     // add in fluid
     if (fluidSprite != null) {
       List<BakedQuad> quads = UnbakedGeometryHelper.bakeElements(
-        UnbakedGeometryHelper.createUnbakedItemMaskElements(1, spriteGetter.apply(context.getMaterial("fluid"))),
+        UnbakedGeometryHelper.createUnbakedItemMaskElements(1, spriteGetter.apply(context.getMaterial("fluid")).contents()),
         $ -> fluidSprite,
         new SimpleModelState(modelState.getRotation().compose(FLUID_TRANSFORM), modelState.isUvLocked()),
         modelLocation

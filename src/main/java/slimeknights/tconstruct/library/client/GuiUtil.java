@@ -147,8 +147,8 @@ public final class GuiUtil {
     // tile vertically
     float u1 = sprite.getU0();
     float v1 = sprite.getV0();
-    int spriteHeight = sprite.getHeight();
-    int spriteWidth = sprite.getWidth();
+    int spriteHeight = sprite.contents().height();
+    int spriteWidth = sprite.contents().width();
     int startX = x + screen.leftPos;
     int startY = y + screen.topPos;
     do {
