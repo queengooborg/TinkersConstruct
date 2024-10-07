@@ -29,7 +29,7 @@ public class SlotButtonItem extends Button {
   private ResourceLocation backgroundLocation = Icons.ICONS;
 
   public SlotButtonItem(int buttonId, int x, int y, StationSlotLayout layout, OnPress onPress) {
-    super(x, y, WIDTH, HEIGHT, layout.getDisplayName(), onPress);
+    super(x, y, WIDTH, HEIGHT, layout.getDisplayName(), onPress, DEFAULT_NARRATION);
     this.layout = layout;
     this.buttonId = buttonId;
   }

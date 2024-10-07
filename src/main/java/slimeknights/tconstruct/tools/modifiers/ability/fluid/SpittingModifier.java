@@ -107,9 +107,9 @@ public class SpittingModifier extends Modifier implements GeneralInteractionModi
                 FluidEffectProjectile spit = new FluidEffectProjectile(entity.level, entity, new FluidStack(fluid, amount), power);
 
                 // setup projectile target
-                Vector3f targetVector = new Vector3f(entity.getViewVector(1.0f));
+                Vector3f targetVector = entity.getViewVector(1.0f).toVector3f();
                 float angle = startAngle + (10 * shotIndex);
-                targetVector.transform(new Quaternionf(new Vector3f(entity.getUpVector(1.0f)), angle, true));
+                targetVector.rotate(new Quaternionf(targetVector.x, targetVector.y, targetVector.z, angle));
                 spit.shoot(targetVector.x(), targetVector.y(), targetVector.z(), velocity, inaccuracy);
 
                 // store all modifiers on the spit

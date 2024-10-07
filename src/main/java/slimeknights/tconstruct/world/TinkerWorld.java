@@ -295,10 +295,10 @@ public final class TinkerWorld extends TinkerModule {
    * Features
    */
   // small veins, standard distribution
-  public static RegistryObject<ConfiguredFeature<OreConfiguration,Feature<OreConfiguration>>> configuredSmallCobaltOre = CONFIGURED_FEATURES.registerSupplier("cobalt_ore_small", () -> Feature.ORE, () -> new OreConfiguration(OreFeatures.NETHERRACK, cobaltOre.get().defaultBlockState(), 4));
+  public static RegistryObject<ConfiguredFeature<OreConfiguration,Feature<OreConfiguration>>> configuredSmallCobaltOre = CONFIGURED_FEATURES.registerSupplier("cobalt_ore_small", () -> Feature.ORE, () -> new OreConfiguration(OreFeatures.ORE_ANCIENT_DEBRIS_SMALL, cobaltOre.get().defaultBlockState(), 4));
   public static RegistryObject<PlacedFeature> placedSmallCobaltOre = PLACED_FEATURES.register("cobalt_ore_small", configuredSmallCobaltOre, CountPlacement.of(5), InSquarePlacement.spread(), PlacementUtils.RANGE_8_8, BiomeFilter.biome());
   // large veins, around y=16, up to 48
-  public static RegistryObject<ConfiguredFeature<OreConfiguration,Feature<OreConfiguration>>> configuredLargeCobaltOre = CONFIGURED_FEATURES.registerSupplier("cobalt_ore_large", () -> Feature.ORE, () -> new OreConfiguration(OreFeatures.NETHERRACK, cobaltOre.get().defaultBlockState(), 6));
+  public static RegistryObject<ConfiguredFeature<OreConfiguration,Feature<OreConfiguration>>> configuredLargeCobaltOre = CONFIGURED_FEATURES.registerSupplier("cobalt_ore_large", () -> Feature.ORE, () -> new OreConfiguration(OreFeatures.ORE_ANCIENT_DEBRIS_LARGE, cobaltOre.get().defaultBlockState(), 6));
   public static RegistryObject<PlacedFeature> placedLargeCobaltOre = PLACED_FEATURES.register("cobalt_ore_large", configuredLargeCobaltOre, CountPlacement.of(3), InSquarePlacement.spread(), HeightRangePlacement.triangle(VerticalAnchor.absolute(8), VerticalAnchor.absolute(32)), BiomeFilter.biome());
 
 

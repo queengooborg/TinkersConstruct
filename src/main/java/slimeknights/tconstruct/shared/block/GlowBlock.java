@@ -32,11 +32,7 @@ public class GlowBlock extends Block {
     this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN));
     this.drops = BuiltInLootTables.EMPTY;
   }
-
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-  }
-
+  
   private static final ImmutableMap<Direction, VoxelShape> BOUNDS;
 
   static {

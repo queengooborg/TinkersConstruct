@@ -16,8 +16,10 @@ import slimeknights.tconstruct.common.registration.GeodeItemObject.BudSize;
 import java.util.EnumMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 /** All sounds registered by Tinkers, should be used instead of vanilla events when subtitles need to be distinguished */
+@Getter
 @Mod.EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public enum Sounds {
   // blocks
@@ -63,7 +65,6 @@ public enum Sounds {
   CHARGED,
   DISCHARGE;
 
-  @Getter
   private final SoundEvent sound;
 
   public static final SoundType EARTH_CRYSTAL = makeCrystalSound(0.75f);
@@ -76,14 +77,12 @@ public enum Sounds {
   public static final Map<BudSize,SoundType> ENDER_CRYSTAL_CLUSTER = makeClusterSounds(1.45f);
 
   Sounds(String name) {
-    ResourceLocation registryName = TConstruct.getResource(name);
-    sound = new SoundEvent(registryName);
+    sound = SoundEvent.create(TConstruct.getResource(name), Optional.of(16.0F));
   }
 
   Sounds() {
     String name = name().toLowerCase(Locale.US);
-    ResourceLocation registryName = TConstruct.getResource(name);
-    sound = new SoundEvent(registryName);
+    sound = SoundEvent.create(TConstruct.getResource(name), Optional.of(16.0F));
   }
 
   @SubscribeEvent

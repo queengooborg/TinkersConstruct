@@ -40,10 +40,8 @@ public class IncrementalFluidCuboid extends FluidCuboid {
     float minY = from.y();
     float maxY = to.y();
     if (gas) {
-      from = from.copy();
       from.y = maxY + (amount * (minY - maxY) / increments);
     } else {
-      to = to.copy();
       to.y = minY + (amount * (maxY - minY) / increments);
     }
 
