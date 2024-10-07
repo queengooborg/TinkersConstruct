@@ -19,7 +19,7 @@ public abstract class BaseRecipeProvider extends RecipeProvider implements ICond
   }
 
   @Override
-  protected abstract void buildCraftingRecipes(Consumer<FinishedRecipe> consumer);
+  protected abstract void buildRecipes(Consumer<FinishedRecipe> consumer);
 
   @Override
   public abstract String getName();
