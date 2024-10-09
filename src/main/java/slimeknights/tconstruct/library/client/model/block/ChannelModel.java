@@ -44,10 +44,10 @@ public class ChannelModel implements IUnbakedGeometry<ChannelModel> {
 		this.fluids = fluids;
 	}
 
-	@Override
-	public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation,UnbakedModel> modelGetter, Set<Pair<String,String>> missingTextureErrors) {
-		return model.getMaterials(owner, modelGetter, missingTextureErrors);
-	}
+  @Override
+  public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter, IGeometryBakingContext context) {
+    model.resolveParents(modelGetter, context);
+  }
 
 	@Override
 	public BakedModel bake(IGeometryBakingContext owner, ModelBaker baker, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
