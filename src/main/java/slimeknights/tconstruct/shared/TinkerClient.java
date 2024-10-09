@@ -96,7 +96,7 @@ public class TinkerClient {
         // this is for the most part a clone of the vanilla logic from ScreenEffectRenderer with some changes mentioned below
 
         TextureAtlasSprite texture = minecraft.getBlockRenderer().getBlockModelShaper().getTexture(state, minecraft.level, pos);
-        RenderSystem.setShaderTexture(0, texture.atlas().location());
+        RenderSystem.setShaderTexture(0, texture.atlasLocation());
         // changed: shader using pos tex
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();

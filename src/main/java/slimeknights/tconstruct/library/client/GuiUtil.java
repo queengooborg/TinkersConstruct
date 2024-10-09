@@ -140,7 +140,7 @@ public final class GuiUtil {
    */
   public static void renderTiledTextureAtlas(PoseStack matrices, AbstractContainerScreen<?> screen, TextureAtlasSprite sprite, int x, int y, int width, int height, int depth, boolean upsideDown) {
     // start drawing sprites
-    RenderUtils.bindTexture(sprite.atlas().location());
+    RenderUtils.bindTexture(sprite.atlasLocation());
     BufferBuilder builder = Tesselator.getInstance().getBuilder();
     builder.begin(Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
 
