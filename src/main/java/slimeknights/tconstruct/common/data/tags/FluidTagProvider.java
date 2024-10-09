@@ -10,11 +10,13 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.fluids.TinkerFluids;
 
+import java.util.concurrent.CompletableFuture;
+
 @SuppressWarnings("unchecked")
 public class FluidTagProvider extends FluidTagsProvider {
 
-  public FluidTagProvider(DataGenerator generatorIn, ExistingFileHelper helper) {
-    super(generatorIn.getPackOutput(), TConstruct.MOD_ID, helper);
+  public FluidTagProvider(DataGenerator generatorIn, CompletableFuture<HolderLookup.Provider> lookup, ExistingFileHelper helper) {
+    super(generatorIn.getPackOutput(), lookup, TConstruct.MOD_ID, helper);
   }
 
   @Override

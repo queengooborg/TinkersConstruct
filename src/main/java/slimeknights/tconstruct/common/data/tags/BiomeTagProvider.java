@@ -7,6 +7,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerTags;
 
+import java.util.concurrent.CompletableFuture;
+
 import static net.minecraft.tags.BiomeTags.IS_BADLANDS;
 import static net.minecraft.tags.BiomeTags.IS_BEACH;
 import static net.minecraft.tags.BiomeTags.IS_DEEP_OCEAN;
@@ -25,8 +27,8 @@ import static net.minecraft.world.level.biome.Biomes.SMALL_END_ISLANDS;
 @SuppressWarnings("unchecked")
 public class BiomeTagProvider extends BiomeTagsProvider {
 
-  public BiomeTagProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
-    super(generatorIn.getPackOutput(), TConstruct.MOD_ID, existingFileHelper);
+  public BiomeTagProvider(DataGenerator generatorIn, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper existingFileHelper) {
+    super(generatorIn.getPackOutput(), provider, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override

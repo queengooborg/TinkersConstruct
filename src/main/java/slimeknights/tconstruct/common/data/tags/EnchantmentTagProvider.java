@@ -15,9 +15,11 @@ import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
+import java.util.concurrent.CompletableFuture;
+
 public class EnchantmentTagProvider extends TagsProvider<Enchantment> {
-  public EnchantmentTagProvider(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
-    super(generator.getPackOutput(), BuiltInRegistries.ENCHANTMENT, TConstruct.MOD_ID, existingFileHelper);
+  public EnchantmentTagProvider(DataGenerator generator, CompletableFuture<HolderLookup.Provider> lookup, @Nullable ExistingFileHelper existingFileHelper) {
+    super(generator.getPackOutput(), Registries.ENCHANTMENT, lookup, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override

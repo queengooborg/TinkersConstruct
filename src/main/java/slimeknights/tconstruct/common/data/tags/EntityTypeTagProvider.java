@@ -10,11 +10,13 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.world.TinkerWorld;
 
+import java.util.concurrent.CompletableFuture;
+
 @SuppressWarnings("unchecked")
 public class EntityTypeTagProvider extends EntityTypeTagsProvider {
 
-  public EntityTypeTagProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
-    super(generatorIn.getPackOutput(), TConstruct.MOD_ID, existingFileHelper);
+  public EntityTypeTagProvider(DataGenerator generatorIn, CompletableFuture<HolderLookup.Provider> lookup, ExistingFileHelper existingFileHelper) {
+    super(generatorIn.getPackOutput(), lookup, TConstruct.MOD_ID, existingFileHelper);
   }
 
   @Override
