@@ -92,7 +92,7 @@ public abstract class AbstractStructureRepalleter extends GenericNBTProvider {
             }
           }
         } catch (IOException e) {
-          return new RuntimeException("Failed to load structure " + original, e);
+          throw new RuntimeException("Failed to load structure " + original, e);
         }
       }
     });
