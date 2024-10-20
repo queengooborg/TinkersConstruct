@@ -2,6 +2,7 @@ package slimeknights.tconstruct.common.data;
 
 import com.mojang.datafixers.DataFixer;
 import com.mojang.datafixers.DataFixerUpper;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.nbt.CompoundTag;
@@ -74,7 +75,7 @@ public class StructureUpdater extends GenericNBTProvider {
   private static CompoundTag updateNBT(CompoundTag nbt) {
     final CompoundTag updatedNBT = NbtUtils.update(DataFixers.getDataFixer(), DataFixTypes.STRUCTURE, nbt, nbt.getInt("DataVersion"));
     StructureTemplate template = new StructureTemplate();
-    template.load(updatedNBT);
+    template.load(BuiltInRegistries.BLOCK.asLookup(), updatedNBT);
     return template.save(new CompoundTag());
   }
 
