@@ -18,14 +18,15 @@ public class TableBlockItem extends RetexturedBlockItem {
     this.showAllCondition = showAllCondition;
   }
 
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.allowedIn(group)) {
-      if (showAllCondition.getAsBoolean()) {
-        addTagVariants(this.getBlock(), this.textureTag, items, true);
-      } else {
-        items.add(new ItemStack(this));
-      }
-    }
-  }
+  // XXX Are any fillItemCategory() methods needed now?
+//  @Override
+//  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+//    if (this.allowedIn(group)) {
+//      if (showAllCondition.getAsBoolean()) {
+//        addTagVariants(this.getBlock(), this.textureTag, items, true);
+//      } else {
+//        items.add(new ItemStack(this));
+//      }
+//    }
+//  }
 }

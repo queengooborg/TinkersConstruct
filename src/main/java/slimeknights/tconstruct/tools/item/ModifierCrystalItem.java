@@ -94,10 +94,11 @@ public class ModifierCrystalItem extends Item {
     return null;
   }
 
-  @Override
-  public void fillItemCategory(CreativeModeTab category, NonNullList<ItemStack> items) {
-    if (this.allowedIn(category)) {
-      ModifierRecipeLookup.getRecipeModifierList().forEach(modifier -> items.add(withModifier(modifier.getId())));
-    }
-  }
+  // XXX Are any fillItemCategory() methods needed now?
+//  @Override
+//  public void fillItemCategory(CreativeModeTab category, NonNullList<ItemStack> items) {
+//    if (this.allowedIn(category)) {
+//      ModifierRecipeLookup.getRecipeModifierList().forEach(modifier -> items.add(withModifier(modifier.getId())));
+//    }
+//  }
 }

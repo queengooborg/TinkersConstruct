@@ -33,12 +33,13 @@ public class SlimeGrassBlock extends SnowyDirtBlock implements BonemealableBlock
     this.foliageType = foliageType;
   }
 
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.foliageType != FoliageType.ICHOR) {
-      super.fillItemCategory(group, items);
-    }
-  }
+  // XXX Are any fillItemCategory() methods needed now?
+//  @Override
+//  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+//    if (this.foliageType != FoliageType.ICHOR) {
+//      super.fillItemCategory(group, items);
+//    }
+//  }
 
   /* Bonemeal interactions */
 

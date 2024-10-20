@@ -71,10 +71,11 @@ public class SlimeLeavesBlock extends LeavesBlock {
 //    return this.isAir(state, world, pos) || state.is(BlockTags.LEAVES) || state.is(TinkerTags.Blocks.SLIMY_LEAVES);
 //  }
 
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.foliageType != FoliageType.ICHOR) {
-      super.fillItemCategory(group, items);
-    }
-  }
+  // XXX Are any fillItemCategory() methods needed now?
+//  @Override
+//  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+//    if (this.foliageType != FoliageType.ICHOR) {
+//      super.fillItemCategory(group, items);
+//    }
+//  }
 }

@@ -58,10 +58,11 @@ public class SlimeTallGrassBlock extends BushBlock implements IForgeShearable {
     return TinkerWorld.slimeDirt.contains(block) || TinkerWorld.vanillaSlimeGrass.contains(block) || TinkerWorld.earthSlimeGrass.contains(block) || TinkerWorld.skySlimeGrass.contains(block) || TinkerWorld.enderSlimeGrass.contains(block) || TinkerWorld.ichorSlimeGrass.contains(block);
   }
 
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.foliageType != FoliageType.ICHOR) {
-      super.fillItemCategory(group, items);
-    }
-  }
+  // XXX Are any fillItemCategory() methods needed now?
+//  @Override
+//  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+//    if (this.foliageType != FoliageType.ICHOR) {
+//      super.fillItemCategory(group, items);
+//    }
+//  }
 }

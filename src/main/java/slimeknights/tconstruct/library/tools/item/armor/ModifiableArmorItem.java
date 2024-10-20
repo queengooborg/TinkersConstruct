@@ -394,12 +394,13 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
 
   /* Display items */
 
-  @Override
-  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-    if (this.allowedIn(group)) {
-      ToolBuildHandler.addDefaultSubItems(this, items);
-    }
-  }
+  // XXX Are any fillItemCategory() methods needed now?
+//  @Override
+//  public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+//    if (this.allowedIn(group)) {
+//      ToolBuildHandler.addDefaultSubItems(this, items);
+//    }
+//  }
 
   @Override
   public ItemStack getRenderTool() {
