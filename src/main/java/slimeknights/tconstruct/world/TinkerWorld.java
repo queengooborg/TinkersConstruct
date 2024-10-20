@@ -212,8 +212,8 @@ public final class TinkerWorld extends TinkerModule {
     Function<FoliageType,BlockBehaviour.Properties> props = type -> builder(Material.PLANT, type.getMapColor(), type.isNether() ? SoundType.FUNGUS : SoundType.GRASS).instabreak().noCollission();
     return new EnumObject.Builder<FoliageType,Block>(FoliageType.class)
       .putAll(BLOCKS.registerEnum(FoliageType.OVERWORLD, "slime_sapling", (type) -> new SlimeSaplingBlock(new SlimeTree(type), type, props.apply(type).randomTicks()), (b) -> new BlockTooltipItem(b, new Item.Properties())))
-      .put(FoliageType.BLOOD, BLOCKS.register("blood_slime_sapling", () -> new SlimeFungusBlock(props.apply(FoliageType.BLOOD), TinkerStructures.bloodSlimeFungus.getKey()), (b) -> new BlockTooltipItem(b, new Item.Properties())))
-      .put(FoliageType.ICHOR, BLOCKS.register("ichor_slime_sapling", () -> new SlimeFungusBlock(props.apply(FoliageType.ICHOR), TinkerStructures.ichorSlimeFungus.getKey()), (b) -> new BlockItem(b, new Item.Properties())))
+      .put(FoliageType.BLOOD, BLOCKS.register("blood_slime_sapling", () -> new SlimeFungusBlock(props.apply(FoliageType.BLOOD), TinkerStructures.bloodSlimeFungus.getKey(), bloodshroom.getLog()), (b) -> new BlockTooltipItem(b, new Item.Properties())))
+      .put(FoliageType.ICHOR, BLOCKS.register("ichor_slime_sapling", () -> new SlimeFungusBlock(props.apply(FoliageType.ICHOR), TinkerStructures.ichorSlimeFungus.getKey(), congealedSlime.get(SlimeType.ICHOR)), (b) -> new BlockItem(b, new Item.Properties())))
       .put(FoliageType.ENDER, BLOCKS.register("ender_slime_sapling", () -> new SlimePropaguleBlock(new SlimeTree(FoliageType.ENDER), FoliageType.ENDER, props.apply(FoliageType.ENDER)), (b) -> new BlockTooltipItem(b, new Item.Properties())))
       .build();
   });
