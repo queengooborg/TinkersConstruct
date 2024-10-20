@@ -2,8 +2,10 @@ package slimeknights.tconstruct.world.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FungusBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -14,8 +16,8 @@ import java.util.function.Supplier;
 
 /** Update of fungus that grows on slime soil instead */
 public class SlimeFungusBlock extends FungusBlock {
-  public SlimeFungusBlock(Properties properties, Supplier<Holder<ConfiguredFeature<HugeFungusConfiguration,?>>> fungusFeature) {
-    super(properties, fungusFeature);
+  public SlimeFungusBlock(Properties properties, ResourceKey<ConfiguredFeature<?,?>> fungusFeature, Block requiredBlock) {
+    super(properties, (ResourceKey<ConfiguredFeature<?, ?>>) (ResourceKey<?>) fungusFeature, requiredBlock);
   }
 
   @Override
