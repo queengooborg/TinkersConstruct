@@ -40,8 +40,6 @@ public class MaterialPaletteDebugGenerator extends GenericTextureGenerator {
             }
             try {
               saveImage(cache, entry.getKey(), palette);
-            } catch (IOException e) {
-              throw new RuntimeException(e);
             } finally {
               palette.close();
             }
