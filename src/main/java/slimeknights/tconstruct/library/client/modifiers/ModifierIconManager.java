@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import slimeknights.mantle.data.listener.IEarlySafeManagerReloadListener;
@@ -55,7 +54,6 @@ public class ModifierIconManager implements IEarlySafeManagerReloadListener {
    */
   public static void init() {
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-    bus.addListener(ModifierIconManager::textureStitch);
     bus.addListener(ModifierIconManager::onResourceManagerRegister);
   }
 
@@ -65,17 +63,14 @@ public class ModifierIconManager implements IEarlySafeManagerReloadListener {
   }
 
   /** Called on texture stitch to add the new textures */
-  private static void textureStitch(TextureStitchEvent event) {
-    if (event.getAtlas().location().equals(InventoryMenu.BLOCK_ATLAS)) {
-      // temporary workaround to the fact that texture stitching might run before the resource loader
-      if (modifierIcons.isEmpty()) {
-        INSTANCE.onReloadSafe(Minecraft.getInstance().getResourceManager());
-      }
-      Consumer<ResourceLocation> spriteAdder = event::addSprite;
-      modifierIcons.values().forEach(list -> list.forEach(spriteAdder));
-      event.addSprite(DEFAULT_COVER);
-      event.addSprite(DEFAULT_PAGES);
+  public static void onTextureStitch(Consumer<ResourceLocation> spriteAdder, ResourceManager manager) {
+    // temporary workaround to the fact that texture stitching might run before the resource loader
+    if (modifierIcons.isEmpty()) {
+      INSTANCE.onReloadSafe(Minecraft.getInstance().getResourceManager());
     }
+    modifierIcons.values().forEach(list -> list.forEach(spriteAdder));
+    spriteAdder.accept(DEFAULT_COVER);
+    spriteAdder.accept(DEFAULT_PAGES);
   }
 
   @Override
