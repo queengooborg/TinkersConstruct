@@ -82,11 +82,11 @@ public class Config {
       builder.comment("Tweaks to vanilla damage sources to better work with armor").push("damageTweaks");
       actions.add(new ConfigurableAction(builder, "wither", true, "Makes withering damage count as magic", DamageSource.WITHER::setMagic));
       actions.add(new ConfigurableAction(builder, "dragon_breath", true, "Makes dragons breath count as magic", DamageSource.DRAGON_BREATH::setMagic));
-      actions.add(new ConfigurableAction(builder, "falling_block", false, "Makes falling blocks count as projectile", () -> {
-        DamageSource.FALLING_BLOCK.setProjectile();
-        DamageSource.ANVIL.setProjectile();
-        DamageSource.FALLING_STALACTITE.setProjectile();
-      }));
+//      actions.add(new ConfigurableAction(builder, "falling_block", false, "Makes falling blocks count as projectile", () -> {
+//        DamageSource.FALLING_BLOCK.setProjectile();
+//        DamageSource.ANVIL.setProjectile();
+//        DamageSource.FALLING_STALACTITE.setProjectile();
+//      }));
       actions.add(new ConfigurableAction(builder, "lightning", true, "Makes lightning count as fire damage", DamageSource.LIGHTNING_BOLT::setIsFire));
       toolTweaks = actions.build();
 
