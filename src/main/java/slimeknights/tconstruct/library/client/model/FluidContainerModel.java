@@ -107,22 +107,6 @@ public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements 
     return new FluidContainerModel(fluidStack, flipGas);
   }
 
-  /** Adds a material to the set if its defined */
-  private static void addMaterial(Set<Material> textures, IGeometryBakingContext owner, String key) {
-    if (owner.hasMaterial(key)) {
-      textures.add(owner.getMaterial(key));
-    }
-  }
-
-  @Override
-  public Collection<Material> getMaterials(IGeometryBakingContext owner, Function<ResourceLocation,UnbakedModel> modelGetter, Set<Pair<String,String>> missingTextureErrors) {
-    Set<Material> textures = Sets.newHashSet();
-    addMaterial(textures, owner, "particle");
-    addMaterial(textures, owner, "base");
-    textures.add(owner.getMaterial("fluid"));
-    return textures;
-  }
-
   /** Gets the given sprite, or null if the texture is not present in the model */
   @Nullable
   private static TextureAtlasSprite getSprite(IGeometryBakingContext context, Function<Material,TextureAtlasSprite> spriteGetter, String key) {
