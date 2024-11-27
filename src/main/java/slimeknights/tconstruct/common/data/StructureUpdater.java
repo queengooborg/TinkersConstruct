@@ -39,7 +39,7 @@ public class StructureUpdater extends GenericNBTProvider {
     this.basePath = basePath;
     try {
       Field resourceManager = ExistingFileHelper.class.getDeclaredField(packType == PackType.SERVER_DATA ? "serverData" : "clientResources");
-      resourceManager.setAccessible(true);
+//      resourceManager.setAccessible(true);
       resources = (MultiPackResourceManager)resourceManager.get(helper);
     } catch (NoSuchFieldException|IllegalAccessException e) {
       throw new RuntimeException(e);
